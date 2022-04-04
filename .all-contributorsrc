@@ -1,0 +1,61 @@
+{
+  "projectName": "cirrus-cempa",
+  "projectOwner": "lapig-ufg",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributorsPerLine": 7,
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
+  "types": {
+    "custom": {
+      "symbol": "🔭",
+      "description": "A custom contribution type.",
+      "link": "[<%= symbol %>](<%= url %> \"<%= description %>\"),"
+    }
+  },
+  "contributors": [
+    {
+      "login": "jairomr",
+      "name": "Jairo Matos Da Rocha",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7321240?v=4",
+      "profile": "http://jairomr.com.br",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    },
+    {
+      "login": "renatowow14",
+      "name": "Renato Gomes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26287257?v=4",
+      "profile": "https://www.linkedin.com/in/renato-gomes-silverio",
+      "contributions": [
+        "infra",
+        "review",
+        "security",
+        "test",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "tharlestsa",
+      "name": "Tharles de Sousa Andrade",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26191865?v=4",
+      "profile": "https://www.linkedin.com/in/tharles-andrade-07228316a/",
+      "contributions": [
+        "code",
+        "ideas",
+        "projectManagement",
+        "translation",
+        "review",
+        "bug"
+      ]
+    }
+  ],
+  "skipCi": true
+}
