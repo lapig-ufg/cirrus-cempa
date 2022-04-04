@@ -1,9 +1,11 @@
 {
   "projectName": "cirrus-cempa",
-  "projectOwner": "jairomr",
+  "projectOwner": "lapig-ufg",
   "repoType": "github",
-  "repoHost": "https://github.com/lapig-ufg/cirrus-cempa",
-  "files": ["README.md"],
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
   "imageSize": 100,
   "commit": false,
   "contributorsPerLine": 7,
@@ -16,5 +18,18 @@
       "link": "[<%= symbol %>](<%= url %> \"<%= description %>\"),"
     }
   },
-  "contributors": []
+  "contributors": [
+    {
+      "login": "jairomr",
+      "name": "Jairo Matos Da Rocha",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7321240?v=4",
+      "profile": "http://jairomr.com.br",
+      "contributions": [
+        "code",
+        "doc",
+        "review"
+      ]
+    }
+  ],
+  "skipCi": true
 }
