@@ -5,7 +5,7 @@ from shutil import rmtree
 from dynaconf import Dynaconf
 from cirrus.grADS2db import to_db
 
-from cirrus.model import clear_tables
+#from cirrus.model import clear_tables
 #from cirrus.netcdf2postgis import main
 from cirrus.util.config import logger
 from cirrus.dowloads import downloads_files
