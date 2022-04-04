@@ -2,6 +2,7 @@
 from shutil import rmtree
 from os.path import isdir
 from os import mkdir
+from datetime import datetime
 from dynaconf import Dynaconf
 from cirrus.grADS2db import to_db
 
@@ -17,6 +18,8 @@ initial_config = Dynaconf(
 
 def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
+
+    _start = datetime.now()
     if downloads_files():
         clear_tables()
         tifs_path = f'{settings.CATALOG}cempa_tifs'
@@ -26,6 +29,7 @@ def main():
         to_db()
     else:
         pass
+    logger.info(f'Fim Time:{datetime.now() - _start}')
 
 if __name__ == '__main__':
     main()
