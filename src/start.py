@@ -1,6 +1,3 @@
-from os import environ, mkdir
-from os.path import isdir
-from shutil import rmtree
 
 from dynaconf import Dynaconf
 from cirrus.grADS2db import to_db
@@ -17,11 +14,11 @@ initial_config = Dynaconf(
 
 def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
-    if downloads_files():
+    #if downloads_files():
         #clear_tables()
-        to_db()
-    else:
-        pass
+    to_db()
+    #else:
+    #    pass
     #main(initial_config.FORCE_SAVE_BD)
 
 
