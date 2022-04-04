@@ -1,5 +1,5 @@
 MAPFILE = "teste.map"
-CEMPADIR = "../STORAGE/catlog/cempa/"
+CEMPADIR = "/STORAGE/cirrus/"
 N_POOL = 10
 vars = ['albedt','tempc','ue_avg','ve_avg',
 'w','rh','geo','cloud','precip','acccon',
