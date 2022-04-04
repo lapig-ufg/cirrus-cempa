@@ -7,7 +7,7 @@ from multiprocessing import Pool
 from glob import glob
 
 
-from cirrus.util.config import variables, settings
+from cirrus.util.config import variables, settings, logger
 
 
 def get_time(dataframe):
@@ -20,7 +20,7 @@ def grads_to_sql(file_name):
     with open_CtlDataset(file_name) as file:
         dataframe = file
         for name in variables:
-            print(file_name, name)
+            logger.debug(f'{file_name} {name}')
 
             var = dataframe.variables[name][0]
             vtime, *_ = [
@@ -58,7 +58,7 @@ def grads_to_sql(file_name):
     return dfs
 
 def to_db():
-    with Pool(settings.N_POO) as workers:
+    with Pool(settings.N_POOL) as workers:
         returns = workers.map(grads_to_sql, glob(f'{settings.CEMPADIR}downloads/*.ctl')[:10])
 
 

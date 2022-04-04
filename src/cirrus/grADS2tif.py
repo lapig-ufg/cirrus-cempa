@@ -4,7 +4,7 @@ import numpy as np
 from os import mkdir
 from os.path import isdir
 
-from cirrus.util.config import settings
+from cirrus.util.config import settings, logger
 
 
 def create_folder_for_tiffs(path_level1, name):
@@ -31,16 +31,18 @@ def grADS2tiff(raster, name, coll_name, id_level=None):
         _type_: _description_
     """
     try:
+        
         raster = dataframe[name][0]
         file_date = get_time(raster)
         tifs_path = f'{settings.CEMPADIR}tifs'
         if isdir(tifs_path):
             rmtree(tifs_path)
         mkdir(tifs_path)
-
+        
         path_level1 = f'{tifs_path}/{file_date}'
         create_folder_for_tiffs(path_level1, name)
         name_tif = f'{path_level1}/{name}/{coll_name}.tif'
+        logger.debug('Criando tif {name_tif}')
         if isinstance(id_level, int):
             raster = raster.isel(lev=id_level).rio.set_spatial_dims(
                 'lon', 'lat'
