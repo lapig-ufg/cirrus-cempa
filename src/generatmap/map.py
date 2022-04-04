@@ -19,7 +19,7 @@ def creat_map_file(
         template = env.get_template('cempa.map')
         row = {}
         logger.info('Gerando .map com dados padrao')
-        title = f"{name.lower()} {coll_name.replace('_', ' ').replace('value','')}_{file_date}"
+        title = f"{name.lower()} {coll_name.replace('_', ' ').replace('value','')} {file_date}"
         row['view_name'] = title
         row['ows_title'] = title
         row['ows_abstract'] = title
