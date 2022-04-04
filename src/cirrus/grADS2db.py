@@ -77,3 +77,8 @@ def to_db():
             'max': tmp_max_minx[name].resample('D', on='datetime').max(),
             'min': tmp_max_minx[name].resample('D', on='datetime').min(),
         }
+
+
+
+if __name__ == '__main__':
+    to_db()
