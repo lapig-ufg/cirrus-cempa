@@ -29,6 +29,19 @@
         "doc",
         "review"
       ]
+    },
+    {
+      "login": "renatowow14",
+      "name": "Renato Gomes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26287257?v=4",
+      "profile": "https://www.linkedin.com/in/renato-gomes-silverio",
+      "contributions": [
+        "infra",
+        "review",
+        "security",
+        "test",
+        "maintenance"
+      ]
     }
   ],
   "skipCi": true
