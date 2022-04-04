@@ -92,7 +92,7 @@ def to_db():
         remove(f'{settings.CATALOG}{settings.MAPFILE}')
     for file in files:
         day = file.split('/')[-3].split('T')[0]
-        var = file.split('/')[-2]
+        var = file.split('/')[-2].upper()
         layer = file.split('/')[-1].replace('.tif','')
         dfmax = max_minx[var]['max']
         dfmin = max_minx[var]['min']
