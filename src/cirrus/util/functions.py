@@ -5,9 +5,9 @@ from os.path import isdir
 
 import seaborn as sns
 
-from cempa.model import FileHash
-from cempa.util.config import logger
-from cempa.util.db import create_session
+from cirrus.model import FileHash
+from cirrus.util.config import logger
+from cirrus.util.db import create_session
 
 
 def get_time(name: str, return_txt=False) -> str:

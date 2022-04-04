@@ -7,7 +7,7 @@ from multiprocessing import Pool
 from glob import glob
 
 
-from cirrus.config import variables, settings
+from cirrus.util.config import variables, settings
 
 
 def get_time(dataframe):
