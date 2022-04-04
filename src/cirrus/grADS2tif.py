@@ -54,4 +54,5 @@ def grADS2tiff(raster, name, coll_name, id_level=None):
         raster.rio.to_raster(name_tif)
         return True
     except:
+        logger.exception('Error no sistem')
         return False
