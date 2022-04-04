@@ -1,5 +1,8 @@
-.PHONY: install pexport run pinstall pformat plint ptest psec
+.PHONY: install test pexport run pinstall pformat plint ptest psec
 
+test:
+	git pull
+	python start.py 
 install:
 	@pip install -r requirements.txt
 pexport:
@@ -17,7 +20,7 @@ plint:
 ptest:
 	@poetry run pytest -v
 run:
-	@cd src && python cli.py --clear --force_save_bd >> log.log
+	@cd src && python start.py >> log.log
 	@cd ..
 psec:
 	@poetry run pip-audit
