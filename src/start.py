@@ -1,6 +1,7 @@
 
 from shutil import rmtree
-from os.path import isdir, mkdir
+from os.path import isdir
+from os import mkdir
 from dynaconf import Dynaconf
 from cirrus.grADS2db import to_db
 
