@@ -14,7 +14,7 @@ from os.path import isfile
 from cirrus.util.config import variables, settings, logger
 from generatmap.map import creat_map_file
 from cirrus.util.db import save_df_bd
-
+from datetime import datetime
 
 def get_time(dataframe):
     return pd.to_datetime(dataframe.time.data[0])
@@ -23,6 +23,7 @@ def get_time(dataframe):
 def grads_to_sql(file_name):
     dfs = {}
     logger.info(file_name)
+    _start = datetime.now()
     with open_CtlDataset(file_name) as file:
         dataframe = file
         for name in variables:
@@ -62,6 +63,7 @@ def grads_to_sql(file_name):
                     pd.DataFrame(_min).T.drop(columns='point_gid'),
                 ]
             )
+    logger.info(f'{file_name} Time: {datetime.now() - _start}')
     return dfs
 
 def to_db():
