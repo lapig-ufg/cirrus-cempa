@@ -3,9 +3,6 @@ from datetime import datetime
 from glob import glob
 from os.path import isdir
 
-import seaborn as sns
-
-from cirrus.model import FileHash
 from cirrus.util.color import color
 from cirrus.util.config import logger
 from cirrus.util.db import create_session
