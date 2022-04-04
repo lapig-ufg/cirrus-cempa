@@ -27,7 +27,7 @@ def grads_to_sql(file_name):
     with open_CtlDataset(file_name) as file:
         dataframe = file
         for name in variables:
-            logger.debug(f'{file_name} {name}')
+            logger.info(f'{file_name} {name}')
 
             var = dataframe.variables[name][0]
             vtime, *_ = [
@@ -50,10 +50,11 @@ def grads_to_sql(file_name):
                 else:
                     grADS2tiff(dataframe, name, layer_name)
                     layers[layer_name] = np.meshgrid(var, indexing='ij')[0]
-
+            logger.info(f'tifs criados {name}')
             temp_df = pd.DataFrame(
                 {'datetime': vtime, **layers, 'point_gid': gid}
             )
+            
             save_df_bd(temp_df, name.lower(),file_name)
             _min = temp_df.min()
             _max = temp_df.max()
