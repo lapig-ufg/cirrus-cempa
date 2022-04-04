@@ -19,7 +19,7 @@ def get_time(raster):
     return np.datetime_as_string(dt, unit='m').replace(':', '-')
 
 
-def grADS2tiff(raster, name, coll_name, id_level=None):
+def grADS2tiff(dataframe, name, coll_name, id_level=None):
     """_summary_
 
     Args:
