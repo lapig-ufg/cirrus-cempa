@@ -25,7 +25,7 @@ def main():
         mkdir(tifs_path)
         to_db()
     else:
-
+        pass
 
 if __name__ == '__main__':
     main()
