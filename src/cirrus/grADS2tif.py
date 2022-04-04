@@ -34,7 +34,7 @@ def grADS2tiff(dataframe, name, coll_name, id_level=None):
         
         raster = dataframe[name][0]
         file_date = get_time(raster)
-        tifs_path = f'{settings.CEMPADIR}cempa_tifs'
+        tifs_path = f'{settings.CATALOG}cempa_tifs'
         path_level1 = f'{tifs_path}/{file_date}'
         create_folder_for_tiffs(path_level1, name.lower())
         name_tif = f'{path_level1}/{name.lower()}/{coll_name}.tif'
@@ -46,7 +46,7 @@ def grADS2tiff(dataframe, name, coll_name, id_level=None):
         else:
             raster = raster.rio.set_spatial_dims('lon', 'lat')
 
-        raster.rio.set_crs('epsg:4674')
+        raster.rio.set_crs(settings.CRS)
         raster.rio.to_raster(name_tif)
         return True
     except:

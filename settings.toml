@@ -1,5 +1,7 @@
-MAPFILE = "teste.map"
+MAPFILE = "cempabigfile.map"
 CEMPADIR = "/STORAGE/cirrus/"
+CATALOG = "/STORAGE/catalog/"
+CRS = 'epsg:4674'
 N_POOL = 10
 vars = ['albedt','tempc','ue_avg','ve_avg',
 'w','rh','geo','cloud','precip','acccon',
@@ -7,6 +9,3 @@ vars = ['albedt','tempc','ue_avg','ve_avg',
 'v10mj','le','h','rshort','rlong','rlongup']
 DBLINK = 'sqlite:////data.bd'
 
-IGNOREHASHFILE = true
-forceCreateFiles = false
-FORCE_SAVE_BD = false
