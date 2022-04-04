@@ -34,10 +34,10 @@ def grADS2tiff(dataframe, name, coll_name, id_level=None):
         
         raster = dataframe[name][0]
         file_date = get_time(raster)
-        tifs_path = f'{settings.CEMPADIR}tifs'
+        tifs_path = f'{settings.CEMPADIR}cempa_tifs'
         path_level1 = f'{tifs_path}/{file_date}'
-        create_folder_for_tiffs(path_level1, name)
-        name_tif = f'{path_level1}/{name}/{coll_name}.tif'
+        create_folder_for_tiffs(path_level1, name.lower())
+        name_tif = f'{path_level1}/{name.lower()}/{coll_name}.tif'
         logger.debug(f'Criando tif {name_tif}')
         if isinstance(id_level, int):
             raster = raster.isel(lev=id_level).rio.set_spatial_dims(

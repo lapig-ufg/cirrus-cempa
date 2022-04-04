@@ -19,7 +19,7 @@ def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
     #if downloads_files():
         #clear_tables()
-    tifs_path = f'{settings.CEMPADIR}tifs'
+    tifs_path = f'{settings.CEMPADIR}cempa_tifs'
     if isdir(tifs_path):
         rmtree(tifs_path)
     mkdir(tifs_path)
