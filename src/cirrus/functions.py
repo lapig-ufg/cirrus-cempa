@@ -37,7 +37,9 @@ def get_min_max(coll_table, table_name):
 def exists_in_the_bank(file_hash: str):
     session = create_session()
     try:
-        is_valid  = session.query(FileHash).filter_by(file_hash = file_hash).first()
+        is_valid = (
+            session.query(FileHash).filter_by(file_hash=file_hash).first()
+        )
         if is_valid.file_hash == file_hash:
             return True
         return False

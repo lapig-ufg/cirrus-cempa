@@ -28,6 +28,7 @@ xarray = "^0.21.1"
 requests = "^2.27.1"
 beautifulsoup4 = "^4.10.0"
 xgrads = "^0.1.82"
+rioxarray = "^0.10.3"
 
 [tool.poetry.dev-dependencies]  
 ipython = "^8.0.1"

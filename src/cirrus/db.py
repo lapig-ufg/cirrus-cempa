@@ -10,16 +10,15 @@ Base = declarative_base()
 
 engine = create_engine(settings.dblink, pool_pre_ping=True)
 
+
 def create_session():
     Session = sessionmaker(bind=engine)
     return Session()
 
 
-
-
-def save_df_bd(df,name):
+def save_df_bd(df, name):
     try:
-        conn = engine.connect() 
+        conn = engine.connect()
         listToWrite = df.to_dict(orient='records')
 
         metadata = MetaData(bind=engine)

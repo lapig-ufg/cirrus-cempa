@@ -24,7 +24,7 @@ class NotTheInformationForToday(Exception):
 def get_links(link=''):
     request = get(f'{url_cempa_files}{link}')
     if request.status_code == 200:
-        soup = BeautifulSoup(request.text, features="html5lib")
+        soup = BeautifulSoup(request.text, features='html5lib')
         return [
             _link
             for _link in [i.get('href') for i in soup.find_all('a')]
@@ -67,6 +67,6 @@ def downloads_files():
     logger.info('End Data Dowload')
     return all(result)
 
+
 if __name__ == '__main__':
     downloads_files()
-
