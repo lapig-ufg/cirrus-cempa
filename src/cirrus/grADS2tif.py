@@ -42,7 +42,7 @@ def grADS2tiff(raster, name, coll_name, id_level=None):
         path_level1 = f'{tifs_path}/{file_date}'
         create_folder_for_tiffs(path_level1, name)
         name_tif = f'{path_level1}/{name}/{coll_name}.tif'
-        logger.debug('Criando tif {name_tif}')
+        logger.debug(f'Criando tif {name_tif}')
         if isinstance(id_level, int):
             raster = raster.isel(lev=id_level).rio.set_spatial_dims(
                 'lon', 'lat'
