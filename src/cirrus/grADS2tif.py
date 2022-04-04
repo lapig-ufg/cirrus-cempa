@@ -34,7 +34,7 @@ def grADS2tiff(raster, name, coll_name, id_level=None):
         
         raster = dataframe[name][0]
         file_date = get_time(raster)
-        tifs_path = f'{settings.CEMPADIR}tifs'
+        tifs_path = f'{settings.CEMPADIR}/tifs'
         if isdir(tifs_path):
             rmtree(tifs_path)
         mkdir(tifs_path)

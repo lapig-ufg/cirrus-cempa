@@ -16,7 +16,7 @@ def get_time(dataframe):
 
 def grads_to_sql(file_name):
     dfs = {}
-    print(file_name)
+    logger.info(file_name)
     with open_CtlDataset(file_name) as file:
         dataframe = file
         for name in variables:
