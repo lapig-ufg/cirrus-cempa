@@ -8,6 +8,7 @@ from glob import glob
 
 
 from cirrus.util.config import variables, settings, logger
+#from cirrus.util.db import save_df_bd
 
 
 def get_time(dataframe):
@@ -47,6 +48,7 @@ def grads_to_sql(file_name):
             temp_df = pd.DataFrame(
                 {'datetime': vtime, **layers, 'point_gid': gid}
             )
+            #save_df_bd(temp_df, name.lower())
             _min = temp_df.min()
             _max = temp_df.max()
             dfs[name] = pd.concat(
@@ -59,7 +61,7 @@ def grads_to_sql(file_name):
 
 def to_db():
     with Pool(settings.N_POOL) as workers:
-        returns = workers.map(grads_to_sql, glob(f'{settings.CEMPADIR}downloads/*.ctl')[:10])
+        returns = workers.map(grads_to_sql, glob(f'{settings.CEMPADIR}downloads/*.ctl')[:5])
 
 
     tmp_max_minx = {}
@@ -77,7 +79,15 @@ def to_db():
             'max': tmp_max_minx[name].resample('D', on='datetime').max(),
             'min': tmp_max_minx[name].resample('D', on='datetime').min(),
         }
+    print(max_minx)
 
+    ## Creat .map
+
+    tifs_path = f'{settings.CATALOG}cempa_tifs'
+
+    files = glob(f'{tifs_path}/*/*/*.tif')
+    print(files)
+    import ipdb; ipdb.set_trace()
 
 
 if __name__ == '__main__':
