@@ -1,5 +1,8 @@
 import numpy as np
 from cirrus.grADS2tif import grADS2tiff
+from os import remove
+
+
 import rioxarray
 from xgrads import open_CtlDataset
 import pandas as pd
@@ -8,6 +11,7 @@ from glob import glob
 
 
 from cirrus.util.config import variables, settings, logger
+from generatmap.map import creat_map_file
 #from cirrus.util.db import save_df_bd
 
 
@@ -79,16 +83,19 @@ def to_db():
             'max': tmp_max_minx[name].resample('D', on='datetime').max(),
             'min': tmp_max_minx[name].resample('D', on='datetime').min(),
         }
-    print(max_minx)
 
     ## Creat .map
-
     tifs_path = f'{settings.CATALOG}cempa_tifs'
-
     files = glob(f'{tifs_path}/*/*/*.tif')
-    print(files)
-    import ipdb; ipdb.set_trace()
-
-
+    remove(f'{settings.CATALOG}/{settings.MAPFILE}')
+    for file in files:
+        day = file.split('/')[-3].split('T')[0]
+        var = file.split('/')[-2]
+        layer = file.split('/')[-1].replace('.tif','')
+        dfmax = max_minx[var]['max']
+        dfmin = max_minx[var]['min']
+        _max = float(dfmax[dfmax.index == day][layer])+0.001
+        _min = float(dfmin[dfmin.index == day][layer])
+        creat_map_file(file,var,layer, (_min,_max), file.split('/')[-3].split('T')[0])
 if __name__ == '__main__':
     to_db()

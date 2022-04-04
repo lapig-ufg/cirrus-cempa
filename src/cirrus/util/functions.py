@@ -6,6 +6,7 @@ from os.path import isdir
 import seaborn as sns
 
 from cirrus.model import FileHash
+from cirrus.util.color import color
 from cirrus.util.config import logger
 from cirrus.util.db import create_session
 
@@ -55,15 +56,17 @@ def save_hash(str_hash: str) -> None:
     session.commit()
 
 
-def get_pallet(_min, _max, color_name='magma', n_class=25):
+def get_pallet(_min, _max, name):
+    _color = color(name)
+    _len_color = len(_color)
     yield from [
         {
-            'min': ((_max - _min) / n_class) * n + _min,
-            'max': ((_max - _min) / n_class) * (n + 1) + _min,
+            'min': ((_max - _min) / _len_color) * n + _min,
+            'max': ((_max - _min) / _len_color) * (n + 1) + _min,
             'color': color,
         }
         for n, color in enumerate(
-            sns.color_palette(color_name, n_colors=n_class).as_hex()
+            _color
         )
     ]
 
