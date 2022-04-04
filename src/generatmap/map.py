@@ -15,7 +15,7 @@ def creat_map_file(
         loader=PackageLoader('generatmap'), autoescape=select_autoescape()
     )
 
-    with open(f'{settings.CATALOG}/{settings.MAPFILE}', 'a') as file_object:
+    with open(f'{settings.CATALOG}{settings.MAPFILE}', 'a') as file_object:
         template = env.get_template('cempa.map')
         row = {}
         logger.info('Gerando .map com dados padrao')

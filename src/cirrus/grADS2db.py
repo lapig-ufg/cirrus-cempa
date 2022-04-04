@@ -8,6 +8,7 @@ from xgrads import open_CtlDataset
 import pandas as pd
 from multiprocessing import Pool
 from glob import glob
+from os.path import isfile
 
 
 from cirrus.util.config import variables, settings, logger
@@ -87,7 +88,8 @@ def to_db():
     ## Creat .map
     tifs_path = f'{settings.CATALOG}cempa_tifs'
     files = glob(f'{tifs_path}/*/*/*.tif')
-    remove(f'{settings.CATALOG}/{settings.MAPFILE}')
+    if isfile(f'{settings.CATALOG}{settings.MAPFILE}'):
+        remove(f'{settings.CATALOG}{settings.MAPFILE}')
     for file in files:
         day = file.split('/')[-3].split('T')[0]
         var = file.split('/')[-2]
