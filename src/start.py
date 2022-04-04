@@ -3,6 +3,7 @@ from os.path import isdir
 from shutil import rmtree
 
 from dynaconf import Dynaconf
+from cirrus.grADS2db import to_db
 
 from cirrus.model import clear_tables
 #from cirrus.netcdf2postgis import main
@@ -17,8 +18,10 @@ initial_config = Dynaconf(
 def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
     if downloads_files():
-        clear_tables()
+        #clear_tables()
+        to_db()
     else:
+        pass
     #main(initial_config.FORCE_SAVE_BD)
 
 
