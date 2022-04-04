@@ -15,7 +15,7 @@ def create_session():
     return Session()
 
 
-def save_df_bd(df, name):
+def save_df_bd(df, name,file_name):
     try:
         conn = engine.connect()
         listToWrite = df.to_dict(orient='records')
@@ -36,4 +36,4 @@ def save_df_bd(df, name):
         # Close the session
         session.close()
     except Exception:
-        logger.exception('Erro ao salvar no banco?!')
+        logger.exception(f'Erro ao salvar no banco! {file_name}')
