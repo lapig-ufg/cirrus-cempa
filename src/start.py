@@ -21,7 +21,9 @@ def main():
 
     _start = datetime.now()
     #if downloads_files():
+    logger.info('indo limpar o banco Banco linado')
     clear_tables()
+    logger.info('Banco linado')
         #Create cempa_tifs
     #tifs_path = f'{settings.CATALOG}cempa_tifs'
     #    if isdir(tifs_path):
