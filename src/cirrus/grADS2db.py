@@ -69,7 +69,7 @@ def grads_to_sql(file_name):
     return dfs
 
 def to_db():
-    logger.inf('Montado as Pool')
+    logger.info('Montado as Pool')
     with Pool(settings.N_POOL) as workers:
         returns = workers.map(grads_to_sql, glob(f'{settings.CEMPADIR}downloads/*.ctl')[:10])
 
