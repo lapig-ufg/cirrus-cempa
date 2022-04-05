@@ -21,7 +21,7 @@ def main():
 
     _start = datetime.now()
     #if downloads_files():
-    #    clear_tables()
+    clear_tables()
         #Create cempa_tifs
     #tifs_path = f'{settings.CATALOG}cempa_tifs'
     #    if isdir(tifs_path):
@@ -31,7 +31,7 @@ def main():
     meta_path = f'{settings.CATALOG}cempa_metadata'
     #    if isdir(meta_path):
     #        rmtree(meta_path)
-    mkdir(meta_path)
+    #mkdir(meta_path)
 
     to_db()
     #else:

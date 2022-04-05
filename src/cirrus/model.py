@@ -54,7 +54,7 @@ class Points(Base):
 class CempaSMOIST1(Base):
     __tablename__ = 'smoist1'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_700 = Column(Float)
     lev_750 = Column(Float)
     lev_800 = Column(Float)
@@ -68,7 +68,7 @@ class CempaSMOIST1(Base):
 class CempaSMOIST2(Base):
     __tablename__ = 'smoist2'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_700 = Column(Float)
     lev_750 = Column(Float)
     lev_800 = Column(Float)
@@ -82,7 +82,7 @@ class CempaSMOIST2(Base):
 class CempaSMOIST3(Base):
     __tablename__ = 'smoist3'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_700 = Column(Float)
     lev_750 = Column(Float)
     lev_800 = Column(Float)
@@ -96,7 +96,7 @@ class CempaSMOIST3(Base):
 class CempaSMOIST4(Base):
     __tablename__ = 'smoist4'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_700 = Column(Float)
     lev_750 = Column(Float)
     lev_800 = Column(Float)
@@ -110,7 +110,7 @@ class CempaSMOIST4(Base):
 class CempaALBEDT(Base):
     __tablename__ = 'albedt'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -118,7 +118,7 @@ class CempaALBEDT(Base):
 class CempaTEMPC(Base):
     __tablename__ = 'tempc'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_100 = Column(Float)
     lev_150 = Column(Float)
     lev_200 = Column(Float)
@@ -144,7 +144,7 @@ class CempaTEMPC(Base):
 class CempaUE_AVG(Base):
     __tablename__ = 'ue_avg'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_100 = Column(Float)
     lev_150 = Column(Float)
     lev_200 = Column(Float)
@@ -170,7 +170,7 @@ class CempaUE_AVG(Base):
 class CempaVE_AVG(Base):
     __tablename__ = 've_avg'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_100 = Column(Float)
     lev_150 = Column(Float)
     lev_200 = Column(Float)
@@ -196,7 +196,7 @@ class CempaVE_AVG(Base):
 class CempaW(Base):
     __tablename__ = 'w'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_100 = Column(Float)
     lev_150 = Column(Float)
     lev_200 = Column(Float)
@@ -222,7 +222,7 @@ class CempaW(Base):
 class CempaRH(Base):
     __tablename__ = 'rh'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_100 = Column(Float)
     lev_150 = Column(Float)
     lev_200 = Column(Float)
@@ -248,7 +248,7 @@ class CempaRH(Base):
 class CempaGEO(Base):
     __tablename__ = 'geo'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_100 = Column(Float)
     lev_150 = Column(Float)
     lev_200 = Column(Float)
@@ -274,7 +274,7 @@ class CempaGEO(Base):
 class CempaCLOUD(Base):
     __tablename__ = 'cloud'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     lev_100 = Column(Float)
     lev_150 = Column(Float)
     lev_200 = Column(Float)
@@ -300,7 +300,7 @@ class CempaCLOUD(Base):
 class CempaPRECIP(Base):
     __tablename__ = 'precip'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -308,7 +308,7 @@ class CempaPRECIP(Base):
 class CempaACCCON(Base):
     __tablename__ = 'acccon'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -316,7 +316,7 @@ class CempaACCCON(Base):
 class CempaSFC_PRESS(Base):
     __tablename__ = 'sfc_press'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -324,7 +324,7 @@ class CempaSFC_PRESS(Base):
 class CempaSEA_PRESS(Base):
     __tablename__ = 'sea_press'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -332,7 +332,7 @@ class CempaSEA_PRESS(Base):
 class CempaT2MJ(Base):
     __tablename__ = 't2mj'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -340,7 +340,7 @@ class CempaT2MJ(Base):
 class CempaTD2MJ(Base):
     __tablename__ = 'td2mj'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -348,7 +348,7 @@ class CempaTD2MJ(Base):
 class CempaU10MJ(Base):
     __tablename__ = 'u10mj'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -356,7 +356,7 @@ class CempaU10MJ(Base):
 class CempaV10MJ(Base):
     __tablename__ = 'v10mj'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -364,7 +364,7 @@ class CempaV10MJ(Base):
 class CempaLE(Base):
     __tablename__ = 'le'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -372,7 +372,7 @@ class CempaLE(Base):
 class CempaH(Base):
     __tablename__ = 'h'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -380,7 +380,7 @@ class CempaH(Base):
 class CempaRSHORT(Base):
     __tablename__ = 'rshort'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -388,7 +388,7 @@ class CempaRSHORT(Base):
 class CempaRLONG(Base):
     __tablename__ = 'rlong'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
@@ -396,7 +396,7 @@ class CempaRLONG(Base):
 class CempaRLONGUP(Base):
     __tablename__ = 'rlongup'
     gid = Column(Integer, primary_key=True)
-    datetime = Column(DateTime, index=True)
+    datetime = Column(DateTime)
     value = Column(Float)
     point_gid = Column(Integer, ForeignKey('points.gid'))
 
