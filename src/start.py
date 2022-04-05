@@ -20,15 +20,22 @@ def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
 
     _start = datetime.now()
-    if downloads_files():
-        clear_tables()
-        tifs_path = f'{settings.CATALOG}cempa_tifs'
-        if isdir(tifs_path):
-            rmtree(tifs_path)
-        mkdir(tifs_path)
-        to_db()
-    else:
-        pass
+    #if downloads_files():
+    #    clear_tables()
+        #Create cempa_tifs
+    #tifs_path = f'{settings.CATALOG}cempa_tifs'
+    #    if isdir(tifs_path):
+    #        rmtree(tifs_path)
+    #mkdir(tifs_path)
+
+    meta_path = f'{settings.CATALOG}cempa_metadata'
+    #    if isdir(meta_path):
+    #        rmtree(meta_path)
+    mkdir(meta_path)
+
+    to_db()
+    #else:
+    #    pass
     logger.info(f'Fim Time:{datetime.now() - _start}')
 
 if __name__ == '__main__':

@@ -1,3 +1,4 @@
+from sys import meta_path
 import numpy as np
 from cirrus.grADS2tif import grADS2tiff
 from os import remove
@@ -43,19 +44,19 @@ def grads_to_sql(file_name):
             gid = [i for i, _ in enumerate(vtime, 1)]
             for _id, layer_name in variables[name]['layers']:
                 if _id > -1:
-                    grADS2tiff(dataframe, name, layer_name,_id)
+                    #rm grADS2tiff(dataframe, name, layer_name,_id)
                     layers[layer_name] = np.meshgrid(var[_id], indexing='ij')[
                         0
                     ]
                 else:
-                    grADS2tiff(dataframe, name, layer_name)
+                    #rm grADS2tiff(dataframe, name, layer_name)
                     layers[layer_name] = np.meshgrid(var, indexing='ij')[0]
             logger.info(f'tifs criados {name}')
             temp_df = pd.DataFrame(
                 {'datetime': vtime, **layers, 'point_gid': gid}
             )
             
-            save_df_bd(temp_df, name.lower(),file_name)
+            #rm save_df_bd(temp_df, name.lower(),file_name)
             _min = temp_df.min()
             _max = temp_df.max()
             dfs[name] = pd.concat(
@@ -82,14 +83,21 @@ def to_db():
 
 
     max_minx = {}
+    meta_path = f'{settings.CATALOG}cempa_metadata'
     for name in tmp_max_minx:
+        __max = tmp_max_minx[name].resample('D', on='datetime').max()
+        __min =_tmp_max_minx[name].resample('D', on='datetime').min()
+        __max.to_csv(f'{meta_path}/{name}_max.csv')
+        __min.to_csv(f'{meta_path}/{name}_min.csv')
         max_minx[name] = {
-            'max': tmp_max_minx[name].resample('D', on='datetime').max(),
-            'min': tmp_max_minx[name].resample('D', on='datetime').min(),
+            'max': __max,
+            'min': __min,
         }
+    tifs_path = f'{settings.CATALOG}cempa_tifs'
+    
 
     ## Creat .map
-    tifs_path = f'{settings.CATALOG}cempa_tifs'
+    """tifs_path = f'{settings.CATALOG}cempa_tifs'
     files = glob(f'{tifs_path}/*/*/*.tif')
     if isfile(f'{settings.CATALOG}{settings.MAPFILE}'):
         remove(f'{settings.CATALOG}{settings.MAPFILE}')
@@ -101,6 +109,6 @@ def to_db():
         dfmin = max_minx[var]['min']
         _max = float(dfmax[dfmax.index == day][layer])+0.001
         _min = float(dfmin[dfmin.index == day][layer])
-        creat_map_file(file,var,layer, (_min,_max), file.split('/')[-3])
+        creat_map_file(file,var,layer, (_min,_max), file.split('/')[-3])"""
 if __name__ == '__main__':
     to_db()
