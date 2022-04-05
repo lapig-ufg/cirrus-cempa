@@ -86,7 +86,7 @@ def to_db():
     meta_path = f'{settings.CATALOG}cempa_metadata'
     for name in tmp_max_minx:
         __max = tmp_max_minx[name].resample('D', on='datetime').max()
-        __min =_tmp_max_minx[name].resample('D', on='datetime').min()
+        __min = tmp_max_minx[name].resample('D', on='datetime').min()
         __max.to_csv(f'{meta_path}/{name}_max.csv')
         __min.to_csv(f'{meta_path}/{name}_min.csv')
         max_minx[name] = {
