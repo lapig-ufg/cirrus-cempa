@@ -44,12 +44,12 @@ def grads_to_sql(file_name):
             gid = [i for i, _ in enumerate(vtime, 1)]
             for _id, layer_name in variables[name]['layers']:
                 if _id > -1:
-                    #rm grADS2tiff(dataframe, name, layer_name,_id)
+                    grADS2tiff(dataframe, name, layer_name,_id)
                     layers[layer_name] = np.meshgrid(var[_id], indexing='ij')[
                         0
                     ]
                 else:
-                    #rm grADS2tiff(dataframe, name, layer_name)
+                    grADS2tiff(dataframe, name, layer_name)
                     layers[layer_name] = np.meshgrid(var, indexing='ij')[0]
             logger.info(f'tifs criados {name}')
             temp_df = pd.DataFrame(

@@ -25,10 +25,10 @@ def main():
     clear_tables()
     logger.info('Banco linado')
         #Create cempa_tifs
-    #tifs_path = f'{settings.CATALOG}cempa_tifs'
-    #    if isdir(tifs_path):
-    #        rmtree(tifs_path)
-    #mkdir(tifs_path)
+    tifs_path = f'{settings.CATALOG}cempa_tifs'
+        if isdir(tifs_path):
+            rmtree(tifs_path)
+    mkdir(tifs_path)
 
     meta_path = f'{settings.CATALOG}cempa_metadata'
     #    if isdir(meta_path):
