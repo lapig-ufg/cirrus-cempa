@@ -98,10 +98,10 @@ def to_db():
     
 
     ## Creat .map
-    """tifs_path = f'{settings.CATALOG}cempa_tifs'
+    tifs_path = f'{settings.CATALOG}cempa_tifs'
     files = glob(f'{tifs_path}/*/*/*.tif')
     if isfile(f'{settings.CATALOG}{settings.MAPFILE}'):
-        remove(f'{settings.CATALOG}{settings.MAPFILE}')"""
+        remove(f'{settings.CATALOG}{settings.MAPFILE}')
     for file in files:
         day = file.split('/')[-3].split('T')[0]
         var = file.split('/')[-2].upper()
