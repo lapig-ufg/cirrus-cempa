@@ -9,7 +9,8 @@ with rasterio.open(f'{root}/value.tif') as src:
 with rasterio.open(f'{root}/color_value.tif', 'w', **meta) as dst:
     dst.write(shade, indexes=1)
     dst.write_colormap(
-        1, {
-            0: (255, 0, 0, 255),
-            255: (0, 0, 255, 255) 
-            })
+            1, {
+                0: (255, 0, 0, 255),
+                255: (0, 0, 255, 255) })
+    cmap = dst.colormap(1)
+print(cmap[0])
