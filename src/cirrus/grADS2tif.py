@@ -3,7 +3,7 @@ import numpy as np
 
 from os import mkdir
 from os.path import isdir
-
+import rasterio
 from cirrus.util.config import settings, logger
 
 
@@ -47,7 +47,7 @@ def grADS2tiff(dataframe, name, coll_name, id_level=None):
             raster = raster.rio.set_spatial_dims('lon', 'lat')
 
         raster.rio.set_crs(settings.CRS)
-        raster.rio.to_raster(name_tif)
+        raster.rio.to_raster(name_tif,colorinterp=[rasterio.enums.ColorInterp.gray])
         return True
     except:
         logger.exception('Error no sistem')
