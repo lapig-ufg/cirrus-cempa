@@ -4,7 +4,7 @@ from geoalchemy2 import Geometry
 from sqlalchemy import Column, ForeignKey, delete
 from sqlalchemy.types import DateTime, Float, Integer, String
 
-from cirrus.util.db import Base, create_session, engine
+from cirrus.util.db import Base, engine
 
 
 class StyleMap(Base):
@@ -406,33 +406,37 @@ Base.metadata.create_all(engine)
 
 def clear_tables():
     talbes = [
-        CempaSMOIST1,
-        CempaSMOIST2,
-        CempaSMOIST3,
-        CempaSMOIST4,
-        CempaALBEDT,
-        CempaTEMPC,
-        CempaUE_AVG,
-        CempaVE_AVG,
-        CempaW,
-        CempaRH,
-        CempaGEO,
-        CempaCLOUD,
-        CempaPRECIP,
-        CempaACCCON,
-        CempaSFC_PRESS,
-        CempaSEA_PRESS,
-        CempaT2MJ,
-        CempaTD2MJ,
-        CempaU10MJ,
-        CempaV10MJ,
-        CempaLE,
-        CempaH,
-        CempaRSHORT,
-        CempaRLONG,
-        CempaRLONGUP,
+        CempaSMOIST1.__table__,
+        CempaSMOIST2.__table__,
+        CempaSMOIST3.__table__,
+        CempaSMOIST4.__table__,
+        CempaALBEDT.__table__,
+        CempaTEMPC.__table__,
+        CempaUE_AVG.__table__,
+        CempaVE_AVG.__table__,
+        CempaW.__table__,
+        CempaRH.__table__,
+        CempaGEO.__table__,
+        CempaCLOUD.__table__,
+        CempaPRECIP.__table__,
+        CempaACCCON.__table__,
+        CempaSFC_PRESS.__table__,
+        CempaSEA_PRESS.__table__,
+        CempaT2MJ.__table__,
+        CempaTD2MJ.__table__,
+        CempaU10MJ.__table__,
+        CempaV10MJ.__table__,
+        CempaLE.__table__,
+        CempaH.__table__,
+        CempaRSHORT.__table__,
+        CempaRLONG.__table__,
+        CempaRLONGUP.__table__,
     ]
-    for table in talbes:
-        # TODO Deletar via trucade reset gid
-        table.drop(engine)
-        table.create(engine)
+    Base.metadata.drop_all(
+        engine,
+        talbes,
+    )
+    Base.metadata.create_all(
+        engine,
+        talbes,
+    )
