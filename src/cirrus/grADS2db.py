@@ -101,7 +101,7 @@ def to_db():
     """tifs_path = f'{settings.CATALOG}cempa_tifs'
     files = glob(f'{tifs_path}/*/*/*.tif')
     if isfile(f'{settings.CATALOG}{settings.MAPFILE}'):
-        remove(f'{settings.CATALOG}{settings.MAPFILE}')
+        remove(f'{settings.CATALOG}{settings.MAPFILE}')"""
     for file in files:
         day = file.split('/')[-3].split('T')[0]
         var = file.split('/')[-2].upper()
@@ -110,6 +110,6 @@ def to_db():
         dfmin = max_minx[var]['min']
         _max = float(dfmax[dfmax.index == day][layer])+0.001
         _min = float(dfmin[dfmin.index == day][layer])
-        creat_map_file(file,var,layer, (_min,_max), file.split('/')[-3])"""
+        creat_map_file(file,var,layer, (_min,_max), file.split('/')[-3])
 if __name__ == '__main__':
     to_db()

@@ -45,8 +45,6 @@ LAYER
       NAME "{{ "%.2f"|format(style['min']) }} - {{ "%.2f"|format(style['max']) }} {{metrica}}"
       EXPRESSION ([{{coll_view}}] >= {{style['min']}} AND [{{coll_view}}] < {{style['max']}})
       STYLE
-        SYMBOL "square"
-        SIZE 10
         COLOR "{{style['color']}}"
       END
     END{% endfor %}
