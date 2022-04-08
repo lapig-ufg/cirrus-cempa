@@ -110,6 +110,6 @@ def to_db():
         dfmin = max_minx[var]['min']
         _max = float(dfmax[dfmax.index == day][layer])+0.001
         _min = float(dfmin[dfmin.index == day][layer])
-        creat_map_file(file,var,layer, (_min,_max), file.split('/')[-3])
+        creat_map_file(file,var,layer, (int(_min*1000),int(_max*1000)), file.split('/')[-3])
 if __name__ == '__main__':
     to_db()
