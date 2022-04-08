@@ -40,11 +40,11 @@ def grADS2tiff(dataframe, name, coll_name, id_level=None):
         name_tif = f'{path_level1}/{name.lower()}/{coll_name}.tif'
         #logger.debug(f'Criando tif {name_tif}')
         if isinstance(id_level, int):
-            raster = raster.isel(lev=id_level).rio.set_spatial_dims(
+            raster = (raster.isel(lev=id_level)* 1000).astype(int).rio.set_spatial_dims(
                 'lon', 'lat'
             )
         else:
-            raster = raster.rio.set_spatial_dims('lon', 'lat')
+            raster = (raster* 1000).astype(int).rio.set_spatial_dims('lon', 'lat')
 
         raster.rio.set_crs(settings.CRS)
         raster.rio.to_raster(name_tif,colorinterp=[rasterio.enums.ColorInterp.palette])
