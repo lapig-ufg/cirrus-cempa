@@ -56,10 +56,14 @@ def save_hash(str_hash: str) -> None:
 def get_pallet(_min, _max, name):
     _color = color(name)
     _len_color = len(_color)
+
     yield from [
         {
-            'min': ((_max - _min) / _len_color) * n + _min,
-            'max': ((_max - _min) / _len_color) * (n + 1) + _min,
+            'mini': int(((_max - _min) / _len_color) * n + _min),
+            'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
+
+            'minf': (((_max - _min) / _len_color) * n + _min)/1000,
+            'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/1000,
             'color': color,
         }
         for n, color in enumerate(
