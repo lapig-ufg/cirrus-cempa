@@ -42,8 +42,8 @@ LAYER
     {% endif %}
 {% for style in styles %}
     CLASS
-      NAME "{{ "%.2f"|format(style['min']) }} - {{ "%.2f"|format(style['max']) }} {{metrica}}"
-      EXPRESSION ([{{coll_view}}] >= {{style['min']}} AND [{{coll_view}}] < {{style['max']}})
+      NAME "{{ "%.2f"|format(style['min']/1000) }} - {{ "%.2f"|format(style['max']/1000) }} {{metrica}}"
+      EXPRESSION ([{{coll_view}}] >= {{int(style['min'])}} AND [{{coll_view}}] < {{int(style['max'])}})
       STYLE
         COLOR "{{style['color']}}"
       END
