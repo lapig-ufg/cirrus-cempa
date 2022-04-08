@@ -20,22 +20,23 @@ def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
 
     _start = datetime.now()
-    #if downloads_files():
-    logger.info('indo limpar o banco Banco linado')
-    clear_tables()
-    logger.info('Banco linado')
-        #Create cempa_tifs
-    tifs_path = f'{settings.CATALOG}cempa_tifs'
-    if isdir(tifs_path):
-        rmtree(tifs_path)
-    mkdir(tifs_path)
+    if downloads_files():
+        logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
+        logger.info('iniciando a limpesa do banco Banco linado')
+        clear_tables()
+        logger.info('Banco limpo')
+            #Create cempa_tifs
+        tifs_path = f'{settings.CATALOG}cempa_tifs'
+        if isdir(tifs_path):
+            rmtree(tifs_path)
+        mkdir(tifs_path)
 
-    meta_path = f'{settings.CATALOG}cempa_metadata'
+        meta_path = f'{settings.CATALOG}cempa_metadata'
     #    if isdir(meta_path):
     #        rmtree(meta_path)
     #mkdir(meta_path)
 
-    to_db()
+        to_db()
     #else:
     #    pass
     logger.info(f'Fim Time:{datetime.now() - _start}')
