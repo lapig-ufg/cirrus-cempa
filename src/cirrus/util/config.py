@@ -3,10 +3,19 @@ from pickle import load
 from dynaconf import Dynaconf
 from loguru import logger
 import numpy as np
-# import necessary packages
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-import smtplib
+
+
+import notifiers
+from notifiers.logging import NotificationHandler
+
+
+
+settings = Dynaconf(
+    envvar_prefix='CEMPA',
+    settings_files=['settings.toml', '.secrets.toml'],
+)
+
+new_level = logger.level("CEMPA", no=41, color="<yellow>")
 
 logger.add(
     '../sys.log',
@@ -21,11 +30,27 @@ logger.add(
     level='WARNING',
 )
 
+params = {
+    "username": settings.EMAIL_ADDRESS,
+    "password": settings.EMAIL_PASSWORD,
+    "subject": f"[logger] {settings.EMAIL_SUBJECT}",
+    "to":  settings.EMAIL_LIST,
+    'from' :settings.EMAIL_ADDRESS,
+    'host': settings.EMAIL_HOST, 
+    'port':settings.EMAIL_PORT,
+    'tls': True, 'ssl': False, 'html': False
 
-settings = Dynaconf(
-    envvar_prefix='CEMPA',
-    settings_files=['settings.toml', '.secrets.toml'],
-)
+}
+
+# Send a single notification
+notifier = notifiers.get_notifier("email")
+notifier.notify(message="The application is running!", **params)
+
+# Be alerted on each error message
+
+handler = NotificationHandler("email", defaults=params)
+logger.add(handler, level="ERROR")
+
 
 
 with open('./metadata/lonlat.obj', 'rb') as tfile:

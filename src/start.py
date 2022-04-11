@@ -18,7 +18,7 @@ initial_config = Dynaconf(
 
 def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
-
+    logger.log('CEMPA','Startd cirrus')
     _start = datetime.now()
     if downloads_files():
         logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
@@ -42,7 +42,7 @@ def main():
         to_db()
     #else:
     #    pass
-    logger.info(f'Fim Time:{datetime.now() - _start}')
+    logger.log('CEMPA',f'end cirrus Time:{datetime.now() - _start}')
 
 if __name__ == '__main__':
     main()
