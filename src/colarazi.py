@@ -12,7 +12,7 @@ params = {
     'port':settings.EMAIL_PORT
 
 }
-
+print(params)
 # Send a single notification
 notifier = notifiers.get_notifier("email")
 notifier.notify(message="The application is running!", **params)
