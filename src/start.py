@@ -30,11 +30,14 @@ def main():
         if isdir(tifs_path):
             rmtree(tifs_path)
         mkdir(tifs_path)
-
+        color_bar = f'{settings.CATALOG}colorbar'
+        if isdir(color_bar):
+            rmtree(color_bar)
+        mkdir(color_bar)
         meta_path = f'{settings.CATALOG}cempa_metadata'
-    #    if isdir(meta_path):
-    #        rmtree(meta_path)
-    #mkdir(meta_path)
+        if isdir(meta_path):
+            rmtree(meta_path)
+        mkdir(meta_path)
 
         to_db()
     #else:

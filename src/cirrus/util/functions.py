@@ -2,10 +2,29 @@ import os
 from datetime import datetime
 from glob import glob
 from os.path import isdir
+import seaborn as sns
+from matplotlib import pyplot as plt
 
 from cirrus.util.color import color
 from cirrus.util.config import logger, variables
 from cirrus.util.db import create_session
+
+
+
+def colobar_convert(n,start,end,_len_color):
+  return f'{((end - start) / _len_color) * n + start:.1f}'
+
+
+def view_colormap(fname, cmap,start, end):
+    """Plot a colormap with its grayscale equivalent"""
+    cmap = sns.color_palette(cmap)
+    colors = cmap
+    
+    fig, ax = plt.subplots(1, figsize=(10, 4),
+                           subplot_kw=dict(xticks=[], yticks=[]))
+    plt.xticks(range(0,21,2),[colobar_convert(n,start,end,20) for n in range(0,21,2)]) 
+    ax.imshow([colors], extent=[0,20, 0, 1])
+    plt.savefig(fname)
 
 
 def get_time(name: str, return_txt=False) -> str:
