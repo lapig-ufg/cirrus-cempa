@@ -2,6 +2,7 @@ from sys import meta_path
 import numpy as np
 from cirrus.grADS2tif import grADS2tiff
 from os import remove
+import json
 
 
 import rioxarray
@@ -98,6 +99,7 @@ def to_db():
     
 
     ## Creat .map
+    biglayer = {}
     tifs_path = f'{settings.CATALOG}cempa_tifs'
     files = glob(f'{tifs_path}/*/*/*.tif')
     if isfile(f'{settings.CATALOG}{settings.MAPFILE}'):
@@ -112,5 +114,15 @@ def to_db():
         _min = float(dfmin[dfmin.index == day][layer])
         _convert = variables[var]['convert']
         creat_map_file(file,var,layer, (int(_min * _convert),int(_max * _convert)), file.split('/')[-3])
+        title = f"{var.lower()}_{layer.replace('value','')}_{file.split('/')[-3]}"
+        if not var in biglayer.keys():
+            biglayer[var] = {}
+        if not layer in biglayer[var].keys():
+            biglayer[var][layer] = []
+        biglayer[var][layer].append(title)
+
+    json_string = json.dumps(biglayer)
+    with open(f'{meta_path}/maps.json', 'w') as outfile:
+        json.dump(json_string, outfile)
 if __name__ == '__main__':
     to_db()
