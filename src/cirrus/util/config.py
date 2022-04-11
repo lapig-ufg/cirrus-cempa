@@ -3,6 +3,11 @@ from pickle import load
 from dynaconf import Dynaconf
 from loguru import logger
 import numpy as np
+# import necessary packages
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
+
 logger.add(
     '../sys.log',
     format='[{time} | {process.id} | {level: <8}] {module}.{function}:{line} {message}',
@@ -330,3 +335,37 @@ variables = {
         },
     }
 
+
+
+
+
+
+def send_email(message):
+    # set up the SMTP server
+    s = smtplib.SMTP(host=settings.EMAIL_HOST, port=settings.EMAIL_PORT,)
+    s.starttls()
+    s.login(settings.EMAIL_ADDRESS, settings.EMAIL_PASSWORD)
+
+    for email in settings.EMAIL_LIST:
+        msg = MIMEMultipart()       # create a message
+
+        # add in the actual person name to the message template
+
+        # setup the parameters of the message
+        msg['From']=settings.EMAIL_ADDRESS,
+        msg['To']=email
+        msg['Subject']=f"[logger] {settings.EMAIL_SUBJECT}"
+
+        # add in the message body
+        msg.attach(MIMEText(message, 'plain'))
+
+        # send the message via the server set up earlier.
+        s.send_message(msg)
+        
+        del msg
+
+logger.add(
+    send_email,
+    format='[{time} | {process.id} | {level: <8}] {module}.{function}:{line} {message}',
+    level='WARNING',
+)
