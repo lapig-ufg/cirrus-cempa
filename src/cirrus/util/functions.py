@@ -17,15 +17,15 @@ def colobar_convert(n,start,end,_len_color):
 
 def view_colormap(fname, cmap,start, end):
     """Plot a colormap with its grayscale equivalent"""
+    plt.rc('xtick', labelsize=16)  
     cmap = sns.color_palette(cmap)
     colors = cmap
     
-    fig, ax = plt.subplots(1, figsize=(10, 4),
+    fig, ax = plt.subplots(1, figsize=(10, 1),
                            subplot_kw=dict(xticks=[], yticks=[]))
     plt.xticks(range(0,21,2),[colobar_convert(n,start,end,20) for n in range(0,21,2)]) 
     ax.imshow([colors], extent=[0,20, 0, 1])
-    plt.savefig(fname)
-
+    plt.savefig(fname,dpi=300, transparent=False)
 
 def get_time(name: str, return_txt=False) -> str:
     date_time_str = (
