@@ -7,7 +7,7 @@ params = {
     "password": settings.EMAIL_PASSWORD,
     "subject": f"[logger] {settings.EMAIL_SUBJECT}",
     "to":  settings.EMAIL_LIST,
-    'from' :f"['{settings.EMAIL_ADDRESS}']",
+    'from' :settings.EMAIL_ADDRESS,
     'host': settings.EMAIL_HOST, 
     'port':settings.EMAIL_PORT
 
