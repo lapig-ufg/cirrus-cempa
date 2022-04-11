@@ -122,7 +122,8 @@ def to_db():
         if not layer in biglayer[var].keys():
             biglayer[var][layer] = []
         biglayer[var][layer].append(title)
-        view_colormap(f'{color_bar}/{day}_{var}_{layer}', variables[var]['color'], _min,_max)
+        if not isfile(f'{color_bar}/{day}_{var}_{layer}.png'):
+            view_colormap(f'{color_bar}/{day}_{var}_{layer}.png', variables[var]['color'], _min,_max)
 
     json_string = json.dumps(biglayer)
     with open(f'{meta_path}/maps.json', 'w') as outfile:
