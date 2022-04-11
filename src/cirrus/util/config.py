@@ -364,8 +364,3 @@ def send_email(message):
         
         del msg
 
-logger.add(
-    send_email,
-    format='[{time} | {process.id} | {level: <8}] {module}.{function}:{line} {message}',
-    level='WARNING',
-)
