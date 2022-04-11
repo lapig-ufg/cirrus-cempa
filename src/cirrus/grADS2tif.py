@@ -3,8 +3,7 @@ import numpy as np
 
 from os import mkdir
 from os.path import isdir
-import rasterio
-from cirrus.util.config import settings, logger
+from cirrus.util.config import settings, logger, variables
 
 
 def create_folder_for_tiffs(path_level1, name):
@@ -40,14 +39,14 @@ def grADS2tiff(dataframe, name, coll_name, id_level=None):
         name_tif = f'{path_level1}/{name.lower()}/{coll_name}.tif'
         #logger.debug(f'Criando tif {name_tif}')
         if isinstance(id_level, int):
-            raster = (raster.isel(lev=id_level)* 1000).astype(np.int16).rio.set_spatial_dims(
+            raster = (raster.isel(lev=id_level)* variables[name]['convert']).astype(variables[name]['type']).rio.set_spatial_dims(
                 'lon', 'lat'
             )
         else:
-            raster = (raster* 1000).astype(np.int16).rio.set_spatial_dims('lon', 'lat')
+            raster = (raster* variables[name]['convert']).astype(variables[name]['type']).rio.set_spatial_dims('lon', 'lat')
 
         raster.rio.set_crs(settings.CRS)
-        raster.rio.to_raster(name_tif,colorinterp=[rasterio.enums.ColorInterp.palette])
+        raster.rio.to_raster(name_tif)
         return True
     except:
         logger.exception('Error no sistem')

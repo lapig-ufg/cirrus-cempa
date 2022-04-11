@@ -34,7 +34,7 @@ def creat_map_file(
                         **row,
                         'styles': get_pallet(
                             *min_max,
-                            name.lower(),
+                            name,
                         ),
                     }
                 )

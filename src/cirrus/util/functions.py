@@ -4,7 +4,7 @@ from glob import glob
 from os.path import isdir
 
 from cirrus.util.color import color
-from cirrus.util.config import logger
+from cirrus.util.config import logger, variables
 from cirrus.util.db import create_session
 
 
@@ -54,7 +54,8 @@ def save_hash(str_hash: str) -> None:
 
 
 def get_pallet(_min, _max, name):
-    _color = color(name)
+    _color = variables[name]['color']
+    _convert = variables[name]['convert']
     _len_color = len(_color)
 
     yield from [
@@ -62,8 +63,8 @@ def get_pallet(_min, _max, name):
             'mini': int(((_max - _min) / _len_color) * n + _min),
             'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
 
-            'minf': (((_max - _min) / _len_color) * n + _min)/1000,
-            'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/1000,
+            'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
+            'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
             'color': color,
         }
         for n, color in enumerate(
