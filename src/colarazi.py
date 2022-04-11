@@ -9,7 +9,8 @@ params = {
     "to":  settings.EMAIL_LIST,
     'from' :settings.EMAIL_ADDRESS,
     'host': settings.EMAIL_HOST, 
-    'port':settings.EMAIL_PORT
+    'port':settings.EMAIL_PORT,
+    'tls': False, 'ssl': False, 'html': False
 
 }
 print(params)
