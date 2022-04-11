@@ -10,6 +10,7 @@ LAYER
       "gml_include_items" "all"
       "gml_geometries"  "the_geom"
     END
+    PROCESSING "RESAMPLE=BILINEAR"
     PROJECTION
       "init=epsg:4674"
     END
