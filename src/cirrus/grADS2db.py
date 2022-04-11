@@ -73,7 +73,7 @@ def grads_to_sql(file_name):
 def to_db():
     logger.info('Montado as Pool')
     with Pool(settings.N_POOL) as workers:
-        returns = workers.map(grads_to_sql, glob(f'{settings.CEMPADIR}downloads/*.ctl')[:5])
+        returns = workers.map(grads_to_sql, glob(f'{settings.CEMPADIR}downloads/*.ctl'))
 
 
     tmp_max_minx = {}
