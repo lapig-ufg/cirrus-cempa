@@ -47,7 +47,8 @@ def save_file(args):
         return True
 
     except Exception as error:
-        logger.exception('Erro ao tentar baixar os dados {error}')
+        logger.log('CEPMPA',f'Erro ao tentar baixar os dados {error}')
+        logger.exception(f'Erro ao tentar baixar os dados {error}')
         return False
 
 

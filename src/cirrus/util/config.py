@@ -15,7 +15,7 @@ settings = Dynaconf(
     settings_files=['settings.toml', '.secrets.toml'],
 )
 
-new_level = logger.level("CEMPA", no=41, color="<yellow>")
+new_level = logger.level("CEMPA", no=55, color="<yellow>")
 
 logger.add(
     '../sys.log',

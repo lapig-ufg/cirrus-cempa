@@ -62,6 +62,7 @@ def exists_in_the_bank(file_hash: str):
     except AttributeError:
         return False
     except:
+        logger.log('CEPMPA',f'Error exists_in_the_bank {error}')
         logger.exception('Error exists_in_the_bank')
         return True
 
@@ -77,6 +78,11 @@ def get_pallet(_min, _max, name):
     _convert = variables[name]['convert']
     _len_color = len(_color)
     for n, _ in enumerate(_color):
+        INTERVALS = int((
+            int(((_max - _min) / _len_color) * (n+1) + _min) - int(((_max - _min) / _len_color) * n + _min)) 
+        / 2)
+        if INTERVALS < 1:
+          INTERVALS = 1
         if n+1 < _len_color:
             yield {
                 'mini': int(((_max - _min) / _len_color) * n + _min),
@@ -84,8 +90,9 @@ def get_pallet(_min, _max, name):
 
                 'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
                 'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
-                'color': _color[n],
-                'color1': _color[n+1]
+                'color0': _color[n],
+                'color1': _color[n+1],
+                'INTERVALS': INTERVALS
             }
         yield {
                 'mini': int(((_max - _min) / _len_color) * n + _min),
@@ -93,8 +100,9 @@ def get_pallet(_min, _max, name):
 
                 'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
                 'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
-                'color': _color[n-1],
-                'color1': _color[n]
+                'color0': _color[n-1],
+                'color1': _color[n],
+                'INTERVALS': INTERVALS
             }
         
 

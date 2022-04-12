@@ -35,5 +35,6 @@ def save_df_bd(df, name,file_name):
 
         # Close the session
         session.close()
-    except Exception:
+    except Exception as e:
+        logger.log('CEMPA',f'Erro ao salvar no banco! {file_name}')
         logger.exception(f'Erro ao salvar no banco! {file_name}')

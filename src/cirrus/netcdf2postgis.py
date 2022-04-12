@@ -79,12 +79,14 @@ def netcsf2sql(file_name: str, rootgrp: Dataset, xr_file, force_save_db):
                     save_df_bd(temp_df, name)
                     save_hash(df_hash)
 
-                except Exception:
+                except Exception as error:
                     error = True
+                    logger.log('CEPMPA',f'Erro ao salva no Banco?! {error}')
                     logger.exception('Erro ao salva no Banco?!')
             else:
                 logger.info('Ja tem no banco')
-        except Exception:
+        except Exception as error:
+            logger.log('CEPMPA',f'What?! {error}')
             logger.exception('What?!')
             error = True
     return error

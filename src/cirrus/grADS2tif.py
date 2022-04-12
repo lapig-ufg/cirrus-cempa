@@ -48,6 +48,7 @@ def grADS2tiff(dataframe, name, coll_name, id_level=None):
         raster.rio.set_crs(settings.CRS)
         raster.rio.to_raster(name_tif)
         return True
-    except:
+    except Exception as e:
+        logger.log('CEPMPA',f'Erro no sistema {error}')
         logger.exception('Error no sistem')
         return False
