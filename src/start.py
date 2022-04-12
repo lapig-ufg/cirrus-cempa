@@ -21,7 +21,7 @@ def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
     send_emai('Startd cirrus')
     _start = datetime.now()
-    if True:#downloads_files():
+    if downloads_files():
         logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
         logger.info('iniciando a limpesa do banco Banco linado')
         clear_tables()
