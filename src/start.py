@@ -43,7 +43,7 @@ def main():
         to_db()
 
         restart_ows = post(initial_config.CEMPA_OWS_URL)
-        print(restart_ows.status)
+        print(restart_ows.status_code)
         print(restart_ows.text)
         if isdir(initial_config.OWS_CACH):
             rmtree(initial_config.OWS_CACH)
