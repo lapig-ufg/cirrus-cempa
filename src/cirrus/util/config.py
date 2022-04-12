@@ -30,27 +30,6 @@ logger.add(
     level='WARNING',
 )
 
-def send_emai(message):
-    params = {
-        "username": settings.EMAIL_ADDRESS,
-        "password": settings.EMAIL_PASSWORD,
-        "subject": f"[logger] {settings.EMAIL_SUBJECT}",
-        "to":  settings.EMAIL_LIST,
-        'from' :settings.EMAIL_ADDRESS,
-        'host': settings.EMAIL_HOST, 
-        'port':settings.EMAIL_PORT,
-        'tls': True, 'ssl': False, 'html': False
-
-    }
-
-    # Send a single notification
-    notifier = notifiers.get_notifier("email")
-    notifier.notify(message=message, **params)
-
-# Be alerted on each error message
-
-#handler = NotificationHandler("email", defaults=params)
-#logger.add(handler, level="CEMPA")
 
 
 
@@ -362,31 +341,21 @@ variables = {
     }
 
 
+def send_emai(message):
+    params = {
+        "username": settings.EMAIL_ADDRESS,
+        "password": settings.EMAIL_PASSWORD,
+        "subject": f"[logger] {settings.EMAIL_SUBJECT}",
+        "to":  settings.EMAIL_LIST,
+        'from' :settings.EMAIL_ADDRESS,
+        'host': settings.EMAIL_HOST, 
+        'port':settings.EMAIL_PORT,
+        'tls': True, 'ssl': False, 'html': False
 
+    }
 
-
-
-def send_email(message):
-    # set up the SMTP server
-    s = smtplib.SMTP(host=settings.EMAIL_HOST, port=settings.EMAIL_PORT,)
-    s.starttls()
-    s.login(settings.EMAIL_ADDRESS, settings.EMAIL_PASSWORD)
-
-    for email in settings.EMAIL_LIST:
-        msg = MIMEMultipart()       # create a message
-
-        # add in the actual person name to the message template
-
-        # setup the parameters of the message
-        msg['From']=settings.EMAIL_ADDRESS,
-        msg['To']=email
-        msg['Subject']=f"[logger] {settings.EMAIL_SUBJECT}"
-
-        # add in the message body
-        msg.attach(MIMEText(message, 'plain'))
-
-        # send the message via the server set up earlier.
-        s.send_message(msg)
-        
-        del msg
+    # Send a single notification
+    notifier = notifiers.get_notifier("email")
+    notifier.notify(message=message, **params)
+    logger.log('CEMPA', message)
 

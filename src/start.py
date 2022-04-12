@@ -43,10 +43,10 @@ def main():
         to_db()
 
         restart_ows = post(initial_config.CEMPA_OWS_URL)
-        print(restart_ows.status_code)
-        print(restart_ows.text)
-        if isdir(initial_config.OWS_CACH):
-            rmtree(initial_config.OWS_CACH)
+        if restart_ows.status_code == 204:
+            if isdir(initial_config.OWS_CACH):
+                rmtree(initial_config.OWS_CACH)
+            send_emai(f'ows reiniciado e cach limpo')
     #else:
     #    pass
     send_emai(f'end cirrus Time:{datetime.now() - _start}')
