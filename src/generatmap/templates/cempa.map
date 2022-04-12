@@ -17,6 +17,14 @@ LAYER
     STATUS ON
     TYPE Raster
     TEMPLATE "DUMMY"
+    CONNECTIONTYPE kerneldensity
+    CONNECTION "pixel"
+    STATUS on
+    PROCESSING "RANGE_COLORSPACE=HSL"
+    PROCESSING "KERNELDENSITY_RADIUS=20"
+    PROCESSING "KERNELDENSITY_COMPUTE_BORDERS=ON"
+    PROCESSING "KERNELDENSITY_NORMALIZATION=AUTO"
+    OFFSITE 0 0 0
     {% else %}
     CONNECTIONTYPE POSTGIS
     CONNECTION "host={{host}} port={{port}} dbname={{dbname}} user={{user}} password={{password}}"
@@ -44,15 +52,8 @@ LAYER
     CLASS
 {% for style in styles %}
     STYLE
-      COLORRANGE
-        RANGEITEM '{{style['coll_view']}}'
-        MINCOLOR '{{style['color0']}}ff' #optional - default = Black
-        MAXCOLOR '{{style['color1']}}00' #optional -default = White
-        MINVALUE {{style['mini']}} #optional - default = 0
-        MAXVALUE {{style['maxi']}} #optional - default = 1
-        INTERVALS {{style['INTERVALS']}}  #optional - default = 0 (unlimited)
-        METHOD LINEAR #optional - default = 'LINEAR'
-      END
+      COLORRANGE '{{style['color0']}}ff' '{{style['color1']}}ff'
+      DATARANGE {{style['mini']}} {{style['maxi']}}
     END
     {% endfor %}
   END
