@@ -46,7 +46,6 @@ LAYER
     STYLE
       COLORRANGE '{{style['color0']}}ff' '{{style['color1']}}ff'
       DATARANGE {{style['mini']}} {{style['maxi']}}
-      END
     END
     {% endfor %}
   END
