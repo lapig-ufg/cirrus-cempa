@@ -47,7 +47,7 @@ LAYER
       NAME "{{ "%.3f"|format(style['minf']) }} - {{ "%.3f"|format(style['maxf']) }} {{metrica}}"
       EXPRESSION ([{{coll_view}}] >= {{style['mini']}} AND [{{coll_view}}] < {{style['maxi']}})
       STYLE
-        COLOR "{{style['color']}}"
+        COLOR "{{style['color0']}}"
       END
     END{% endfor %}
 END
