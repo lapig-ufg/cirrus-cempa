@@ -76,20 +76,27 @@ def get_pallet(_min, _max, name):
     _color = variables[name]['color']
     _convert = variables[name]['convert']
     _len_color = len(_color)
+    for n, _ in enumerate(_color):
+        if n+1 < _len_color:
+            yield {
+                'mini': int(((_max - _min) / _len_color) * n + _min),
+                'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
 
-    yield from [
-        {
-            'mini': int(((_max - _min) / _len_color) * n + _min),
-            'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
+                'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
+                'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
+                'color': _color[n],
+                'color1': _color[n+1]
+            }
+        yield {
+                'mini': int(((_max - _min) / _len_color) * n + _min),
+                'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
 
-            'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
-            'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
-            'color': color,
-        }
-        for n, color in enumerate(
-            _color
-        )
-    ]
+                'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
+                'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
+                'color': _color[n-1],
+                'color1': _color[n]
+            }
+        
 
 
 def create_folder_for_tiffs(path_level1, name):

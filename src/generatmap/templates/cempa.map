@@ -41,13 +41,20 @@ LAYER
       "DEFAULT_MSFILTER" "datetime = (select min(datetime) from {{table_name}})"
     END
     {% endif %}
-{% for style in styles %}
     CLASS
-      NAME "{{ "%.3f"|format(style['minf']) }} - {{ "%.3f"|format(style['maxf']) }} {{metrica}}"
-      EXPRESSION ([{{coll_view}}] >= {{style['mini']}} AND [{{coll_view}}] < {{style['maxi']}})
-      STYLE
-        COLOR "{{style['color']}}"
+{% for style in styles %}
+    STYLE
+      COLORRANGE
+        RANGEITEM '{{coll_view}}' #required
+        MINCOLOR {{style['color']}} #optional - default = Black
+        MAXCOLOR {{style['color1']}} #optional -default = White
+        MINVALUE {{style['mini']}} #optional - default = 0
+        MAXVALUE {{style['maxi']}} #optional - default = 1
+        INTERVALS 10 #optional - default = 0 (unlimited)
+        METHOD LINEAR #optional - default = 'LINEAR'
       END
-    END{% endfor %}
+    END
+    {% endfor %}
+  END
 END
 
