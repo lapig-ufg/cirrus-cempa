@@ -49,7 +49,7 @@ LAYER
     CLASS
 {% for style in styles %}
       STYLE
-        COLORRANGE '{{style['color0']}}00' '{{style['color1']}}ff'
+        COLORRANGE '{{style['color0']}}ff' '{{style['color1']}}ff'
         DATARANGE {{style['mini']}} {{style['maxi']}}
       END
     {% endfor %}
