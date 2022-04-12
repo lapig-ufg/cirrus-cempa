@@ -78,33 +78,34 @@ def get_pallet(_min, _max, name):
     _convert = variables[name]['convert']
     _len_color = len(_color)
     for n, _ in enumerate(_color):
-        INTERVALS = int((
-            int(((_max - _min) / _len_color) * (n+1) + _min) - int(((_max - _min) / _len_color) * n + _min)) 
-        / 2)
-        if INTERVALS < 1:
-          INTERVALS = 1
+        #INTERVALS = int((
+        #    int(((_max - _min) / _len_color) * (n+1) + _min) - int(((_max - _min) / _len_color) * n + _min)) 
+        #/ 2)
+        #if INTERVALS < 1:
+        #  INTERVALS = 1
         if n+1 < _len_color:
             yield {
                 'mini': int(((_max - _min) / _len_color) * n + _min),
                 'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
 
-                'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
-                'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
+                #'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
+                #'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
                 'color0': _color[n],
                 'color1': _color[n+1],
-                'INTERVALS': INTERVALS
+                #'INTERVALS': INTERVALS
             }
-        yield {
-                'mini': int(((_max - _min) / _len_color) * n + _min),
-                'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
+        else:
+          yield {
+                  'mini': int(((_max - _min) / _len_color) * n + _min),
+                  'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
 
-                'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
-                'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
-                'color0': _color[n-1],
-                'color1': _color[n],
-                'INTERVALS': INTERVALS
-            }
-        
+                  #'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
+                  #'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
+                  'color0': _color[n-1],
+                  'color1': _color[n],
+                  #'INTERVALS': INTERVALS
+              }
+             
 
 
 def create_folder_for_tiffs(path_level1, name):
