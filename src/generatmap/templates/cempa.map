@@ -45,7 +45,7 @@ LAYER
 {% for style in styles %}
     STYLE
       COLORRANGE
-        RANGEITEM '{{coll_view}}' #required
+        RANGEITEM [{{coll_view}}] #required
         MINCOLOR '{{style['color']}}' #optional - default = Black
         MAXCOLOR '{{style['color1']}}' #optional -default = White
         MINVALUE {{style['mini']}} #optional - default = 0
