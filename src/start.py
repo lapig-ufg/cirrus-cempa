@@ -5,6 +5,7 @@ from os import mkdir
 from datetime import datetime
 from dynaconf import Dynaconf
 from cirrus.grADS2db import to_db
+from requests import post
 
 from cirrus.model import clear_tables
 #from cirrus.netcdf2postgis import main
@@ -40,6 +41,12 @@ def main():
         mkdir(meta_path)
 
         to_db()
+
+        restart_ows = post(initial_config.CEMPA_OWS_URS)
+        print(restart_ows.status)
+        print(restart_ows.text)
+        if isdir(initial_config.OWS_CACH):
+            rmtree(initial_config.OWS_CACH)
     #else:
     #    pass
     logger.log('CEMPA',f'end cirrus Time:{datetime.now() - _start}')

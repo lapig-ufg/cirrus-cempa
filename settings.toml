@@ -9,3 +9,4 @@ vars = ['albedt','tempc','ue_avg','ve_avg',
 'v10mj','le','h','rshort','rlong','rlongup']
 DBLINK = 'sqlite:////data.bd'
 
+OWS_CACH = '/STORAGE/ows-cache/layers/'
