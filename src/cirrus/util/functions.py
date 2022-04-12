@@ -88,8 +88,8 @@ def get_pallet(_min, _max, name):
                 'mini': int(((_max - _min) / _len_color) * n + _min),
                 'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
 
-                #'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
-                #'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
+                'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
+                'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
                 'color0': _color[n],
                 'color1': _color[n+1],
                 #'INTERVALS': INTERVALS
