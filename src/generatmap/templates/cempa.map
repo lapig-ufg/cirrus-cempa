@@ -50,7 +50,7 @@ LAYER
         MAXCOLOR '{{style['color1']}}' #optional -default = White
         MINVALUE {{style['mini']}} #optional - default = 0
         MAXVALUE {{style['maxi']}} #optional - default = 1
-        INTERVALS 10 #optional - default = 0 (unlimited)
+        INTERVALS {{style['INTERVALS']}}  #optional - default = 0 (unlimited)
         METHOD LINEAR #optional - default = 'LINEAR'
       END
     END
