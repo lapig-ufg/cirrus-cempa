@@ -10,7 +10,7 @@ LAYER
       "gml_include_items" "all"
       "gml_geometries"  "the_geom"
     END
-    
+
     PROJECTION
       "init=epsg:4674"
     END
@@ -46,8 +46,8 @@ LAYER
     STYLE
       COLORRANGE
         
-        MINCOLOR '{{style['color']}}' #optional - default = Black
-        MAXCOLOR '{{style['color1']}}' #optional -default = White
+        MINCOLOR '{{style['color']}}00' #optional - default = Black
+        MAXCOLOR '{{style['color1']}}00' #optional -default = White
         MINVALUE {{style['mini']}} #optional - default = 0
         MAXVALUE {{style['maxi']}} #optional - default = 1
         INTERVALS {{style['INTERVALS']}}  #optional - default = 0 (unlimited)
