@@ -10,19 +10,13 @@ LAYER
       "gml_include_items" "all"
       "gml_geometries"  "the_geom"
     END
-
+    PROCESSING "RESAMPLE=BILINEAR"
     PROJECTION
       "init=epsg:4674"
     END
     STATUS ON
     TYPE Raster
     TEMPLATE "DUMMY"
-    CONNECTIONTYPE kerneldensity
-    PROCESSING "RANGE_COLORSPACE=HSL"
-    PROCESSING "KERNELDENSITY_RADIUS=20"
-    PROCESSING "KERNELDENSITY_COMPUTE_BORDERS=ON"
-    PROCESSING "KERNELDENSITY_NORMALIZATION=AUTO"
-    OFFSITE 0 0 0
     {% else %}
     CONNECTIONTYPE POSTGIS
     CONNECTION "host={{host}} port={{port}} dbname={{dbname}} user={{user}} password={{password}}"
@@ -47,13 +41,14 @@ LAYER
       "DEFAULT_MSFILTER" "datetime = (select min(datetime) from {{table_name}})"
     END
     {% endif %}
-    CLASS
 {% for style in styles %}
+    CLASS
+      
+      NAME "{{ "%.3f"|format(style['minf']) }} - {{ "%.3f"|format(style['maxf']) }} {{metrica}}"
+      EXPRESSION ([{{coll_view}}] >= {{style['mini']}} AND [{{coll_view}}] < {{style['maxi']}})
       STYLE
-        COLORRANGE '{{style['color0']}}00' '{{style['color0']}}ff'
-        DATARANGE {{style['mini']}} {{style['maxi']}}
+        COLOR "{{style['color']}}"
       END
-    {% endfor %}
-    END
+    END{% endfor %}
 END
 
