@@ -6,7 +6,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 
 from cirrus.util.color import color
-from cirrus.util.config import logger, variables
+from cirrus.util.config import send_emai, logger, variables
 from cirrus.util.db import create_session
 
 
@@ -62,7 +62,7 @@ def exists_in_the_bank(file_hash: str):
     except AttributeError:
         return False
     except:
-        logger.log('CEPMPA',f'Error exists_in_the_bank {error}')
+        send_emai(f'Error exists_in_the_bank {error}')
         logger.exception('Error exists_in_the_bank')
         return True
 

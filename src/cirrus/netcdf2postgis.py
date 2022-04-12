@@ -9,7 +9,7 @@ import xarray as xr
 from netCDF4 import Dataset
 
 from cirrus.netCDFtoTIFF import nc2tiff
-from cirrus.util.config import is_goias, lats, logger, lons, ormdtype, settings
+from cirrus.util.config import send_emai, is_goias, lats, logger, lons, ormdtype, settings
 from cirrus.util.db import engine, save_df_bd
 from cirrus.util.hash import data_frame2hash, generate_file_md5
 
@@ -81,12 +81,12 @@ def netcsf2sql(file_name: str, rootgrp: Dataset, xr_file, force_save_db):
 
                 except Exception as error:
                     error = True
-                    logger.log('CEPMPA',f'Erro ao salva no Banco?! {error}')
+                    send_emai(f'Erro ao salva no Banco?! {error}')
                     logger.exception('Erro ao salva no Banco?!')
             else:
                 logger.info('Ja tem no banco')
         except Exception as error:
-            logger.log('CEPMPA',f'What?! {error}')
+            send_emai(f'What?! {error}')
             logger.exception('What?!')
             error = True
     return error

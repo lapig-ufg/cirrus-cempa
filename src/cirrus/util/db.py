@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.schema import MetaData
 
-from cirrus.util.config import logger, settings
+from cirrus.util.config import send_emai, logger, settings
 
 Base = declarative_base()
 
@@ -36,5 +36,5 @@ def save_df_bd(df, name,file_name):
         # Close the session
         session.close()
     except Exception as e:
-        logger.log('CEMPA',f'Erro ao salvar no banco! {file_name}')
+        send_emai(f'Erro ao salvar no banco! {file_name}')
         logger.exception(f'Erro ao salvar no banco! {file_name}')

@@ -9,7 +9,7 @@ from requests import post
 
 from cirrus.model import clear_tables
 #from cirrus.netcdf2postgis import main
-from cirrus.util.config import logger, settings
+from cirrus.util.config import logger, settings, send_emai
 from cirrus.dowloads import downloads_files
 
 initial_config = Dynaconf(
@@ -19,7 +19,7 @@ initial_config = Dynaconf(
 
 def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
-    logger.log('CEMPA','Startd cirrus')
+    send_emai('Startd cirrus')
     _start = datetime.now()
     if True:#downloads_files():
         logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
@@ -49,7 +49,7 @@ def main():
             rmtree(initial_config.OWS_CACH)
     #else:
     #    pass
-    logger.log('CEMPA',f'end cirrus Time:{datetime.now() - _start}')
+    send_emai(f'end cirrus Time:{datetime.now() - _start}')
 
 if __name__ == '__main__':
     main()

@@ -30,26 +30,27 @@ logger.add(
     level='WARNING',
 )
 
-params = {
-    "username": settings.EMAIL_ADDRESS,
-    "password": settings.EMAIL_PASSWORD,
-    "subject": f"[logger] {settings.EMAIL_SUBJECT}",
-    "to":  settings.EMAIL_LIST,
-    'from' :settings.EMAIL_ADDRESS,
-    'host': settings.EMAIL_HOST, 
-    'port':settings.EMAIL_PORT,
-    'tls': True, 'ssl': False, 'html': False
+def send_emai(message):
+    params = {
+        "username": settings.EMAIL_ADDRESS,
+        "password": settings.EMAIL_PASSWORD,
+        "subject": f"[logger] {settings.EMAIL_SUBJECT}",
+        "to":  settings.EMAIL_LIST,
+        'from' :settings.EMAIL_ADDRESS,
+        'host': settings.EMAIL_HOST, 
+        'port':settings.EMAIL_PORT,
+        'tls': True, 'ssl': False, 'html': False
 
-}
+    }
 
-# Send a single notification
-notifier = notifiers.get_notifier("email")
-notifier.notify(message="The application is running!", **params)
+    # Send a single notification
+    notifier = notifiers.get_notifier("email")
+    notifier.notify(message=message, **params)
 
 # Be alerted on each error message
 
-handler = NotificationHandler("email", defaults=params)
-logger.add(handler, level="CEMPA")
+#handler = NotificationHandler("email", defaults=params)
+#logger.add(handler, level="CEMPA")
 
 
 

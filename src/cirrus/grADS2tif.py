@@ -3,7 +3,7 @@ import numpy as np
 
 from os import mkdir
 from os.path import isdir
-from cirrus.util.config import settings, logger, variables
+from cirrus.util.config import send_emai, settings, logger, variables
 
 
 def create_folder_for_tiffs(path_level1, name):
@@ -49,6 +49,6 @@ def grADS2tiff(dataframe, name, coll_name, id_level=None):
         raster.rio.to_raster(name_tif)
         return True
     except Exception as e:
-        logger.log('CEPMPA',f'Erro no sistema {error}')
+        send_emai(f'Erro no sistema {error}')
         logger.exception('Error no sistem')
         return False

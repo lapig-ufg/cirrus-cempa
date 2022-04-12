@@ -7,7 +7,7 @@ from shutil import rmtree
 from bs4 import BeautifulSoup
 from requests import get
 
-from cirrus.util.config import logger, settings
+from cirrus.util.config import send_emai, logger, settings
 
 today = date.today()
 url_cempa_files = (
@@ -47,7 +47,7 @@ def save_file(args):
         return True
 
     except Exception as error:
-        logger.log('CEPMPA',f'Erro ao tentar baixar os dados {error}')
+        send_emai(f'Erro ao tentar baixar os dados {error}')
         logger.exception(f'Erro ao tentar baixar os dados {error}')
         return False
 
