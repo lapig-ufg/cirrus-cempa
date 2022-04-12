@@ -49,7 +49,7 @@ notifier.notify(message="The application is running!", **params)
 # Be alerted on each error message
 
 handler = NotificationHandler("email", defaults=params)
-logger.add(handler, level="ERROR")
+logger.add(handler, level="CEMPA")
 
 
 
