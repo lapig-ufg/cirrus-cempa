@@ -85,5 +85,5 @@ def load_layer(layer):
 
 
 def run(LAYERS):
-    with Pool(20) as workes:
+    with Pool(settings.CACH_POOL) as workes:
         result = workes.map(load_layer, LAYERS)

@@ -50,8 +50,12 @@ def main():
 
     restart_ows = post(initial_config.CEMPA_OWS_URL)
     if restart_ows.status_code == 204:
+        time.sleep(5)
         if isdir(initial_config.OWS_CACH):
-            rmtree(initial_config.OWS_CACH)
+            try:
+                rmtree(initial_config.OWS_CACH)
+            except Exception:
+                logger.exception('Error ao limpar o cach')
         logger.log('CEMPA', f'ows reiniciado e cach limpo')
         time.sleep(120)
         logger.log('CEMPA', f'inicinado criacao do cach')
