@@ -7,7 +7,7 @@ from shutil import rmtree
 from bs4 import BeautifulSoup
 from requests import get
 
-from cirrus.util.config import send_emai, logger, settings
+from cirrus.util.config import logger, settings
 
 today = date.today()
 url_cempa_files = (

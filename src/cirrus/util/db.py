@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.schema import MetaData
 
-from cirrus.util.config import send_emai, logger, settings
+from cirrus.util.config import logger, settings
 
 Base = declarative_base()
 

@@ -70,7 +70,7 @@ async def processRequests(layer):
                 status = resp.status
                 txt = await resp.read()
                 del(txt)
-                print(url,status)
+                logger.debug(url,status)
 
 def load_layer(layer):
     asyncio.run(processRequests(layer))

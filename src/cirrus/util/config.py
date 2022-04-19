@@ -350,7 +350,7 @@ variables = {
     }
 
 
-def send_emai(message):
+def send_emai():
     params = {
         "username": settings.EMAIL_ADDRESS,
         "password": settings.EMAIL_PASSWORD,
@@ -362,9 +362,9 @@ def send_emai(message):
         'tls': True, 'ssl': False, 'html': False
 
     }
-
+    with open('../http.log','r') as file:
+        message = file.read()
     # Send a single notification
     notifier = notifiers.get_notifier("email")
     notifier.notify(message=message, **params)
-    logger.log('CEMPA', message)
 

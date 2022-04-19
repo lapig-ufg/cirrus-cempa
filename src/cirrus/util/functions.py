@@ -6,7 +6,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 
 from cirrus.util.color import color
-from cirrus.util.config import send_emai, logger, variables
+from cirrus.util.config import logger, variables
 from cirrus.util.db import create_session
 
 

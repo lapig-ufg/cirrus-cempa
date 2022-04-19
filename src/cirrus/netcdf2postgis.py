@@ -9,7 +9,7 @@ import xarray as xr
 from netCDF4 import Dataset
 
 from cirrus.netCDFtoTIFF import nc2tiff
-from cirrus.util.config import send_emai, is_goias, lats, logger, lons, ormdtype, settings
+from cirrus.util.config import is_goias, lats, logger, lons, ormdtype, settings
 from cirrus.util.db import engine, save_df_bd
 from cirrus.util.hash import data_frame2hash, generate_file_md5
 

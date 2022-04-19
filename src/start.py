@@ -9,7 +9,7 @@ from requests import post
 
 from cirrus.model import clear_tables
 #from cirrus.netcdf2postgis import main
-from cirrus.util.config import logger, settings
+from cirrus.util.config import logger, send_emai, settings
 from cirrus.dowloads import downloads_files
 
 initial_config = Dynaconf(
@@ -50,6 +50,7 @@ def main():
     #else:
     #    pass
     logger.log('CEMPA', f'end cirrus Time:{datetime.now() - _start}')
+    send_emai()
 
 if __name__ == '__main__':
     main()
