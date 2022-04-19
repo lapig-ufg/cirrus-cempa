@@ -1,4 +1,3 @@
-from sys import meta_path
 import numpy as np
 from cirrus.grADS2tif import grADS2tiff
 from os import remove
@@ -11,6 +10,7 @@ import pandas as pd
 from multiprocessing import Pool
 from glob import glob
 from os.path import isfile
+from pickle import dump
 
 
 from cirrus.util.config import variables, settings, logger
@@ -100,7 +100,7 @@ def to_db():
     
 
     ## Creat .map
-    biglayer = {}
+    biglayer = []
     tifs_path = f'{settings.CATALOG}cempa_tifs'
     color_bar = f'{settings.CATALOG}colorbar'
     files = glob(f'{tifs_path}/*/*/*.tif')
@@ -117,16 +117,12 @@ def to_db():
         _convert = variables[var]['convert']
         creat_map_file(file,var,layer, (int(_min * _convert),int((_max+0.01) * _convert)), file.split('/')[-3])
         title = f"{var.lower()}_{layer.replace('value','')}_{file.split('/')[-3]}"
-        if not var in biglayer.keys():
-            biglayer[var] = {}
-        if not layer in biglayer[var].keys():
-            biglayer[var][layer] = []
-        biglayer[var][layer].append(title)
-        if not isfile(f'{color_bar}/{day}_{var}_{layer}.png'):
-            view_colormap(f'{color_bar}/{day}_{var}_{layer}.png', variables[var]['color'], _min,_max)
+        biglayer.append(title)
+        if not isfile(f'{color_bar}/{title}.png'):
+            view_colormap(f'{color_bar}/{title}.png', variables[var]['color'], _min,_max)
 
-    json_string = json.dumps(biglayer)
-    with open(f'{meta_path}/maps.json', 'w') as outfile:
-        json.dump(json_string, outfile)
+
+    with open(f'{meta_path}/maps.obj', 'w') as outfile:
+        dump(biglayer, outfile)
 if __name__ == '__main__':
     to_db()
