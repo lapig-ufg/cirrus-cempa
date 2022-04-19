@@ -85,5 +85,5 @@ def load_layer(layer):
 
 
 def run(LAYERS):
-    with Pool(settings.N_POOL) as workes:
+    with Pool(20) as workes:
         result = workes.map(load_layer, LAYERS)
