@@ -9,8 +9,6 @@ import pandas as pd
 from multiprocessing import Pool
 from glob import glob
 from os.path import isfile
-from pickle import dump
-from cirrus.util.cach_make import run
 
 
 from cirrus.util.config import variables, settings, logger
@@ -121,7 +119,7 @@ def to_db():
         if not isfile(f'{color_bar}/{title}.png'):
             view_colormap(f'{color_bar}/{title}.png', variables[var]['color'], _min,_max)
 
-    run(biglayer)
+    return biglayer
 
 
 if __name__ == '__main__':

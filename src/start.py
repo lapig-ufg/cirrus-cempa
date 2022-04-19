@@ -8,8 +8,10 @@ from cirrus.grADS2db import to_db
 from requests import post
 import os
 from os.path import exists
+import time
 
 from cirrus.model import clear_tables
+from cirrus.util.cach_make import run
 #from cirrus.netcdf2postgis import main
 from cirrus.util.config import logger, send_emai, settings
 from cirrus.dowloads import downloads_files
@@ -44,13 +46,17 @@ def main():
             rmtree(meta_path)
         mkdir(meta_path)
 
-        to_db()
+        layer = to_db()
 
         restart_ows = post(initial_config.CEMPA_OWS_URL)
         if restart_ows.status_code == 204:
             if isdir(initial_config.OWS_CACH):
                 rmtree(initial_config.OWS_CACH)
             logger.log('CEMPA', f'ows reiniciado e cach limpo')
+            time.sleep(300)
+            logger.log('CEMPA', f'inicinado criacao do cach')
+            run(layer)
+            
     #else:
     #    pass
     logger.log('CEMPA', f'end cirrus Time:{datetime.now() - _start}')
