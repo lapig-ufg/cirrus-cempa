@@ -18,8 +18,6 @@ url_cempa_files = (
 class NotTheInformationForToday(Exception):
     """Not the Information for today"""
 
-    pass
-
 
 def get_links(link=''):
     request = get(f'{url_cempa_files}{link}')

@@ -1,4 +1,3 @@
-
 from shutil import rmtree
 from os.path import isdir
 from os import mkdir
@@ -12,7 +11,8 @@ import time
 
 from cirrus.model import clear_tables
 from cirrus.util.cach_make import run
-#from cirrus.netcdf2postgis import main
+
+# from cirrus.netcdf2postgis import main
 from cirrus.util.config import logger, send_emai, settings
 from cirrus.dowloads import downloads_files
 
@@ -21,18 +21,19 @@ initial_config = Dynaconf(
     settings_files=['settings.toml', '.secrets.toml'],
 )
 
+
 def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
-    logger.log('CEMPA','Startd cirrus')
+    logger.log('CEMPA', 'Startd cirrus')
     _start = datetime.now()
-    if exists("../http.log"):
-        os.remove("../http.log")
+    if exists('../http.log'):
+        os.remove('../http.log')
     if downloads_files():
         logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
         logger.info('iniciando a limpesa do banco Banco linado')
         clear_tables()
         logger.info('Banco limpo')
-            #Create cempa_tifs
+        # Create cempa_tifs
         tifs_path = f'{settings.CATALOG}cempa_tifs'
         if isdir(tifs_path):
             rmtree(tifs_path)
@@ -56,11 +57,12 @@ def main():
             time.sleep(300)
             logger.log('CEMPA', f'inicinado criacao do cach')
             run(layer)
-            
-    #else:
+
+    # else:
     #    pass
     logger.log('CEMPA', f'end cirrus Time:{datetime.now() - _start}')
     send_emai()
+
 
 if __name__ == '__main__':
     main()

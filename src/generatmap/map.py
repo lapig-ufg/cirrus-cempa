@@ -1,7 +1,7 @@
 from jinja2 import Environment, PackageLoader, select_autoescape
 from sqlalchemy import select
 
-#from cirrus.model import StyleMap
+# from cirrus.model import StyleMap
 from cirrus.util.config import logger, settings
 from cirrus.util.db import create_session
 from cirrus.util.functions import get_min_max, get_pallet
@@ -10,7 +10,7 @@ from cirrus.util.functions import get_min_max, get_pallet
 def creat_map_file(
     file_name, name, coll_name, min_max, file_date='', geotiff=True
 ):
-    
+
     env = Environment(
         loader=PackageLoader('generatmap'), autoescape=select_autoescape()
     )

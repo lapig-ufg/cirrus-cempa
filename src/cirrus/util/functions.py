@@ -10,22 +10,26 @@ from cirrus.util.config import logger, variables
 from cirrus.util.db import create_session
 
 
+def colobar_convert(n, start, end, _len_color):
+    return f'{((end - start) / _len_color) * n + start:.1f}'
 
-def colobar_convert(n,start,end,_len_color):
-  return f'{((end - start) / _len_color) * n + start:.1f}'
 
-
-def view_colormap(fname, cmap,start, end):
+def view_colormap(fname, cmap, start, end):
     """Plot a colormap with its grayscale equivalent"""
-    plt.rc('xtick', labelsize=16)  
+    plt.rc('xtick', labelsize=16)
     cmap = sns.color_palette(cmap)
     colors = cmap
-    
-    fig, ax = plt.subplots(1, figsize=(10, 1),
-                           subplot_kw=dict(xticks=[], yticks=[]))
-    plt.xticks(range(0,21,2),[colobar_convert(n,start,end,20) for n in range(0,21,2)]) 
-    ax.imshow([colors], extent=[0,20, 0, 1])
-    plt.savefig(fname,dpi=300, transparent=False)
+
+    fig, ax = plt.subplots(
+        1, figsize=(10, 1), subplot_kw=dict(xticks=[], yticks=[])
+    )
+    plt.xticks(
+        range(0, 21, 2),
+        [colobar_convert(n, start, end, 20) for n in range(0, 21, 2)],
+    )
+    ax.imshow([colors], extent=[0, 20, 0, 1])
+    plt.savefig(fname, dpi=300, transparent=False)
+
 
 def get_time(name: str, return_txt=False) -> str:
     date_time_str = (
@@ -75,36 +79,35 @@ def save_hash(str_hash: str) -> None:
 def get_pallet(_min, _max, name):
     _color = variables[name]['color']
     _convert = variables[name]['convert']
-    _len_color = len(_color)
+    _len_cor = len(_color)
     for n, _ in enumerate(_color):
-        #INTERVALS = int((
-        #    int(((_max - _min) / _len_color) * (n+1) + _min) - int(((_max - _min) / _len_color) * n + _min)) 
-        #/ 2)
-        #if INTERVALS < 1:
+        # INTERVALS = int((
+        #    int(((_max - _min) / _len_color) * (n+1) + _min) - int(((_max - _min) / _len_color) * n + _min))
+        # / 2)
+        # if INTERVALS < 1:
         #  INTERVALS = 1
-        if n+1 < _len_color:
+        eq_minmax = (_max - _min) 
+        if n + 1 < _len_color:
             yield {
-                'mini': int(((_max - _min) / _len_color) * n + _min),
-                'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
-
-                'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
-                'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
+                'mini': int((eq_minmax / _len_cor) * n + _min),
+                'maxi': int((eq_minmax / _len_cor) * (n + 1) + _min),
+                'minf': ((eq_minmax / _len_cor) * n + _min) / _convert,
+                'maxf': ((eq_minmax / _len_cor) * (n + 1) + _min) / _convert,
                 'color0': _color[n],
-                'color1': _color[n+1],
+                'color1': _color[n + 1],
                 #'INTERVALS': INTERVALS
             }
         else:
-          yield {
-                  'mini': int(((_max - _min) / _len_color) * n + _min),
-                  'maxi': int(((_max - _min) / _len_color) * (n+1) + _min),
-
-                  'minf': (((_max - _min) / _len_color) * n + _min)/_convert,
-                  'maxf': (((_max - _min) / _len_color) * (n+1) + _min)/_convert,
-                  'color0': _color[n-1],
-                  'color1': _color[n],
-                  #'INTERVALS': INTERVALS
-              }
-             
+            yield {
+                'mini': int((eq_minmax / _len_cor) * n + _min),
+                'maxi': int((eq_minmax / _len_cor) * (n + 1) + _min),
+                'minf': ((eq_minmax / _len_cor) * n + _min) / _convert,
+                'maxf': ((eq_minmax / _len_cor) * (n + 1) + _min)
+                / _convert,
+                'color0': _color[n - 1],
+                'color1': _color[n],
+                #'INTERVALS': INTERVALS
+            }
 
 
 def create_folder_for_tiffs(path_level1, name):

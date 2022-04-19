@@ -17,6 +17,7 @@ from cirrus.util.db import save_df_bd
 from datetime import datetime
 from cirrus.util.functions import view_colormap
 
+
 def get_time(dataframe):
     return pd.to_datetime(dataframe.time.data[0])
 
@@ -44,7 +45,7 @@ def grads_to_sql(file_name):
             gid = [i for i, _ in enumerate(vtime, 1)]
             for _id, layer_name in variables[name]['layers']:
                 if _id > -1:
-                    grADS2tiff(dataframe, name, layer_name,_id)
+                    grADS2tiff(dataframe, name, layer_name, _id)
                     layers[layer_name] = np.meshgrid(var[_id], indexing='ij')[
                         0
                     ]
@@ -68,11 +69,13 @@ def grads_to_sql(file_name):
     logger.info(f'{file_name} Time: {datetime.now() - _start}')
     return dfs
 
+
 def to_db():
     logger.info('Montado as Pool')
     with Pool(settings.N_POOL) as workers:
-        returns = workers.map(grads_to_sql, glob(f'{settings.CEMPADIR}downloads/*.ctl'))
-
+        returns = workers.map(
+            grads_to_sql, glob(f'{settings.CEMPADIR}downloads/*.ctl')
+        )
 
     tmp_max_minx = {}
     for result in returns:
@@ -81,7 +84,6 @@ def to_db():
                 tmp_max_minx[i] = pd.concat([tmp_max_minx[i], result[i]])
             except Exception as e:
                 tmp_max_minx[i] = result[i]
-
 
     max_minx = {}
     meta_path = f'{settings.CATALOG}cempa_metadata'
@@ -95,7 +97,6 @@ def to_db():
             'min': __min,
         }
     tifs_path = f'{settings.CATALOG}cempa_tifs'
-    
 
     ## Creat .map
     biglayer = []
@@ -107,17 +108,27 @@ def to_db():
     for file in files:
         day = file.split('/')[-3].split('T')[0]
         var = file.split('/')[-2].upper()
-        layer = file.split('/')[-1].replace('.tif','')
+        layer = file.split('/')[-1].replace('.tif', '')
         dfmax = max_minx[var]['max']
         dfmin = max_minx[var]['min']
         _max = float(dfmax[dfmax.index == day][layer])
         _min = float(dfmin[dfmin.index == day][layer])
         _convert = variables[var]['convert']
-        creat_map_file(file,var,layer, (int(_min * _convert),int((_max+0.01) * _convert)), file.split('/')[-3])
-        title = f"{var.lower()}_{layer.replace('value','')}_{file.split('/')[-3]}"
+        creat_map_file(
+            file,
+            var,
+            layer,
+            (int(_min * _convert), int((_max + 0.01) * _convert)),
+            file.split('/')[-3],
+        )
+        title = (
+            f"{var.lower()}_{layer.replace('value','')}_{file.split('/')[-3]}"
+        )
         biglayer.append(title)
         if not isfile(f'{color_bar}/{title}.png'):
-            view_colormap(f'{color_bar}/{title}.png', variables[var]['color'], _min,_max)
+            view_colormap(
+                f'{color_bar}/{title}.png', variables[var]['color'], _min, _max
+            )
 
     return biglayer
 
