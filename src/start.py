@@ -30,7 +30,7 @@ def main():
     #if downloads_files():
     logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
     logger.info('iniciando a limpesa do banco Banco linado')
-    clear_tables()
+    #clear_tables()
     logger.info('Banco limpo')
         # Create cempa_tifs
     #    tifs_path = f'{settings.CATALOG}cempa_tifs'
