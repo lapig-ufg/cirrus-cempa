@@ -63,7 +63,7 @@ def downloads_files():
     ]
     logger.info('Starting Data Download')
     with Pool(settings.N_POOL) as workers:
-        result = workers.map(save_file, files_link)
+        result = workers.map(save_file, files_link[:5])
     logger.info('End Data Dowload')
     return all(result)
 

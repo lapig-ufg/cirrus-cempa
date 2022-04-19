@@ -3,7 +3,7 @@ from pickle import load
 from dynaconf import Dynaconf
 from loguru import logger
 import numpy as np
-import os
+
 
 
 import notifiers
@@ -32,7 +32,6 @@ logger.add(
 )
 
 
-os.remove("../http.log")
 logger.add(
     '../http.log',
     format='[{time} | {process.id} | {level: <8}] {module}.{function}:{line} {message}',

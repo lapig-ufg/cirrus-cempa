@@ -6,6 +6,8 @@ from datetime import datetime
 from dynaconf import Dynaconf
 from cirrus.grADS2db import to_db
 from requests import post
+import os
+from os.path import exists
 
 from cirrus.model import clear_tables
 #from cirrus.netcdf2postgis import main
@@ -21,6 +23,8 @@ def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
     logger.log('CEMPA','Startd cirrus')
     _start = datetime.now()
+    if exists("../http.log"):
+        os.remove("../http.log")
     if downloads_files():
         logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
         logger.info('iniciando a limpesa do banco Banco linado')
