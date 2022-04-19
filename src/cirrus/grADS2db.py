@@ -55,7 +55,7 @@ def grads_to_sql(file_name):
                 {'datetime': vtime, **layers, 'point_gid': gid}
             )
             # Salvar no banco de dados
-            # save_df_bd(temp_df, name.lower(),file_name)
+            save_df_bd(temp_df, name.lower(),file_name)
             _min = temp_df.min()
             _max = temp_df.max()
             dfs[name] = pd.concat(
