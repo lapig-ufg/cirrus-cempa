@@ -88,7 +88,7 @@ def get_pallet(_min, _max, name):
         # if INTERVALS < 1:
         #  INTERVALS = 1
         eq_minmax = (_max - _min) 
-        if n + 1 < _len_color:
+        if n + 1 < _len_cor:
             yield {
                 'mini': int((eq_minmax / _len_cor) * n + _min),
                 'maxi': int((eq_minmax / _len_cor) * (n + 1) + _min),
