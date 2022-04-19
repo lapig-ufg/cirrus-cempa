@@ -1,20 +1,19 @@
-from shutil import rmtree
-from os.path import isdir
-from os import mkdir
-from datetime import datetime
-from dynaconf import Dynaconf
-from cirrus.grADS2db import to_db
-from requests import post
 import os
-from os.path import exists
 import time
+from datetime import datetime
+from os import mkdir
+from os.path import exists, isdir
+from shutil import rmtree
 
+from dynaconf import Dynaconf
+from requests import post
+
+from cirrus.dowloads import downloads_files
+from cirrus.grADS2db import to_db
 from cirrus.model import clear_tables
 from cirrus.util.cach_make import run
-
 # from cirrus.netcdf2postgis import main
 from cirrus.util.config import logger, send_emai, settings
-from cirrus.dowloads import downloads_files
 
 initial_config = Dynaconf(
     envvar_prefix='CEMPA',

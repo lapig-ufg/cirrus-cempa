@@ -1,11 +1,12 @@
-import json
-import math
-from pickle import load
-import aiohttp
 import asyncio
 import json
-from cirrus.util.config import logger, settings
+import math
 from multiprocessing import Pool
+from pickle import load
+
+import aiohttp
+
+from cirrus.util.config import logger, settings
 
 BBOX_BRAZIL = {
     'bottom': -21.0000000000000000,

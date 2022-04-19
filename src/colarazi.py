@@ -1,6 +1,6 @@
-from cirrus.util.config import settings
-from cirrus.util.config import logger
 import notifiers
+
+from cirrus.util.config import logger, settings
 
 params = {
     'username': settings.EMAIL_ADDRESS,

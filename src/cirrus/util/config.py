@@ -1,13 +1,10 @@
 from pickle import load
 
+import notifiers
+import numpy as np
 from dynaconf import Dynaconf
 from loguru import logger
-import numpy as np
-
-
-import notifiers
 from notifiers.logging import NotificationHandler
-
 
 settings = Dynaconf(
     envvar_prefix='CEMPA',

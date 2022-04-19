@@ -1,21 +1,19 @@
-import numpy as np
-from cirrus.grADS2tif import grADS2tiff
-from os import remove
-
-
-import rioxarray
-from xgrads import open_CtlDataset
-import pandas as pd
-from multiprocessing import Pool
+from datetime import datetime
 from glob import glob
+from multiprocessing import Pool
+from os import remove
 from os.path import isfile
 
+import numpy as np
+import pandas as pd
+import rioxarray
+from xgrads import open_CtlDataset
 
-from cirrus.util.config import variables, settings, logger
-from generatmap.map import creat_map_file
+from cirrus.grADS2tif import grADS2tiff
+from cirrus.util.config import logger, settings, variables
 from cirrus.util.db import save_df_bd
-from datetime import datetime
 from cirrus.util.functions import view_colormap
+from generatmap.map import creat_map_file
 
 
 def get_time(dataframe):

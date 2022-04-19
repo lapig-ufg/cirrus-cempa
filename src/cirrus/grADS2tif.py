@@ -1,9 +1,10 @@
-from shutil import rmtree
-import numpy as np
-
 from os import mkdir
 from os.path import isdir
-from cirrus.util.config import settings, logger, variables
+from shutil import rmtree
+
+import numpy as np
+
+from cirrus.util.config import logger, settings, variables
 
 
 def create_folder_for_tiffs(path_level1, name):
