@@ -10,3 +10,6 @@ vars = ['albedt','tempc','ue_avg','ve_avg',
 DBLINK = 'sqlite:////data.bd'
 
 OWS_CACH = '/STORAGE/ows-cache/layers/'
+
+
+OWS_ROOT_URL = 'https://ows-cempa.lapig.iesa.ufg.br/ows'

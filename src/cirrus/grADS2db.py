@@ -1,7 +1,6 @@
 import numpy as np
 from cirrus.grADS2tif import grADS2tiff
 from os import remove
-import json
 
 
 import rioxarray
@@ -11,6 +10,7 @@ from multiprocessing import Pool
 from glob import glob
 from os.path import isfile
 from pickle import dump
+from cirrus.util.cach_make import run
 
 
 from cirrus.util.config import variables, settings, logger
@@ -121,8 +121,8 @@ def to_db():
         if not isfile(f'{color_bar}/{title}.png'):
             view_colormap(f'{color_bar}/{title}.png', variables[var]['color'], _min,_max)
 
+    run(biglayer)
 
-    with open(f'{meta_path}/maps.obj', 'w') as outfile:
-        dump(biglayer, outfile)
+
 if __name__ == '__main__':
     to_db()

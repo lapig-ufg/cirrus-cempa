@@ -17,8 +17,7 @@ BBOX_BRAZIL =  {
 meta_path = f'{settings.CATALOG}cempa_metadata'
 
 
-with open(f'{meta_path}/maps.obj', 'rb') as tfile:
-   LAYERS = load(tfile)
+
 
 MAX_ZOOM_LEVEL = [3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
 # PORT 5000 - HOMOLOGAÇÃO
@@ -73,10 +72,11 @@ async def processRequests(layer):
                 del(txt)
                 print(url,status)
 
-def run(layer):
+def load_layer(layer):
     asyncio.run(processRequests(layer))
 
-if __name__ == "__main__":
+def run(LAYERS):
     with Pool(settings.N_POOL) as workes:
-        result = workes.map(run, LAYERS)
+        result = workes.map(load_layer, LAYERS)
     
+

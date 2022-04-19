@@ -9,7 +9,7 @@ from requests import post
 
 from cirrus.model import clear_tables
 #from cirrus.netcdf2postgis import main
-from cirrus.util.config import logger, settings, send_emai
+from cirrus.util.config import logger, settings
 from cirrus.dowloads import downloads_files
 
 initial_config = Dynaconf(
@@ -19,7 +19,7 @@ initial_config = Dynaconf(
 
 def main():
     logger.info(f'Numero de pool {initial_config.N_POOL}')
-    send_emai('Startd cirrus')
+    logger.log('CEMPA','Startd cirrus')
     _start = datetime.now()
     if downloads_files():
         logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
@@ -46,10 +46,10 @@ def main():
         if restart_ows.status_code == 204:
             if isdir(initial_config.OWS_CACH):
                 rmtree(initial_config.OWS_CACH)
-            send_emai(f'ows reiniciado e cach limpo')
+            logger.log('CEMPA', f'ows reiniciado e cach limpo')
     #else:
     #    pass
-    send_emai(f'end cirrus Time:{datetime.now() - _start}')
+    logger.log('CEMPA', f'end cirrus Time:{datetime.now() - _start}')
 
 if __name__ == '__main__':
     main()

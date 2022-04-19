@@ -62,7 +62,6 @@ def exists_in_the_bank(file_hash: str):
     except AttributeError:
         return False
     except:
-        send_emai(f'Error exists_in_the_bank {error}')
         logger.exception('Error exists_in_the_bank')
         return True
 

@@ -47,7 +47,6 @@ def save_file(args):
         return True
 
     except Exception as error:
-        send_emai(f'Erro ao tentar baixar os dados {error}')
         logger.exception(f'Erro ao tentar baixar os dados {error}')
         return False
 
