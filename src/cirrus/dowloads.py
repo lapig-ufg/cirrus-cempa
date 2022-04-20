@@ -11,7 +11,7 @@ from cirrus.util.config import logger, settings
 
 today = date.today()
 url_cempa_files = (
-    f'https://tatu.cempa.ufg.br/BRAMS-dataout/{today.strftime("%Y%m%d")}00/'
+    f'https://tatu.cempa.ufg.br/BRAMS-dataout/2022041200/' # {today.strftime("%Y%m%d")}00/'
 )
 
 
