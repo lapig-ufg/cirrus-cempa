@@ -30,7 +30,7 @@ logger.add(
 logger.add(
     '../http.log',
     format='[{time} | {process.id} | {level: <8}] {module}.{function}:{line} {message}',
-    rotation='500 MB',
+    retention="1 days",
     level='CEMPA',
 )
 
