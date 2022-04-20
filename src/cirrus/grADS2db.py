@@ -69,7 +69,8 @@ def grads_to_sql(file_name):
 
 
 
-def creat_map_and_bar(file,max_minx):
+def creat_map_and_bar(args):
+    file, max_minx = args
     day = file.split('/')[-3].split('T')[0]
     var = file.split('/')[-2].upper()
     layer = file.split('/')[-1].replace('.tif', '')
