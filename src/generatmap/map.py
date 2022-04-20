@@ -15,32 +15,32 @@ def creat_map_file(
         loader=PackageLoader('generatmap'), autoescape=select_autoescape()
     )
 
-    with open(f'{settings.CATALOG}{settings.MAPFILE}', 'a') as file_object:
-        template = env.get_template('cempa.map')
-        row = {}
-        logger.info(f'ADD no .map para o tiff {file_name}')
-        title = f"{name.lower()}_{coll_name.replace('value','')}_{file_date}"
-        row['view_name'] = title
-        row['ows_title'] = title
-        row['ows_abstract'] = title
-        row['geotiff'] = geotiff
-        if geotiff:
-            row['coll_view'] = 'pixel'
-            row['file_name'] = file_name
-        try:
-            file_object.write(
-                template.render(
-                    {
-                        **row,
-                        'styles': get_pallet(
-                            *min_max,
-                            name,
-                        ),
-                    }
-                )
-            )
-        except:
-            logger.exception('Error')
+    
+    template = env.get_template('cempa.map')
+    row = {}
+    logger.info(f'ADD no .map para o tiff {file_name}')
+    title = f"{name.lower()}_{coll_name.replace('value','')}_{file_date}"
+    row['view_name'] = title
+    row['ows_title'] = title
+    row['ows_abstract'] = title
+    row['geotiff'] = geotiff
+    if geotiff:
+        row['coll_view'] = 'pixel'
+        row['file_name'] = file_name
+    try:
+        return template.render(
+            {
+                **row,
+                'styles': get_pallet(
+                    *min_max,
+                    name,
+                ),
+             }
+        )
+    
+    except:
+        logger.exception('Error')
+        return ''
 
 
 def creat_by_bd():
