@@ -148,7 +148,7 @@ def to_db():
     for tmp_text, title in returns_map_and_bar:
         text_list.append(tmp_text)
         biglayer.append(title)
-
+    import ipdb; ipdb.set_trace()
     text = '\n'.join(tmp_text)
 
     with open(f'{settings.CATALOG}{settings.MAPFILE}', 'w') as file_object:
