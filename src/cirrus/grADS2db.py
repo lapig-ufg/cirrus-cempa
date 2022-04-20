@@ -43,19 +43,19 @@ def grads_to_sql(file_name):
             gid = [i for i, _ in enumerate(vtime, 1)]
             for _id, layer_name in variables[name]['layers']:
                 if _id > -1:
-                    grADS2tiff(dataframe, name, layer_name, _id)
+                    #grADS2tiff(dataframe, name, layer_name, _id)
                     layers[layer_name] = np.meshgrid(var[_id], indexing='ij')[
                         0
                     ]
                 else:
-                    grADS2tiff(dataframe, name, layer_name)
+                    #grADS2tiff(dataframe, name, layer_name)
                     layers[layer_name] = np.meshgrid(var, indexing='ij')[0]
             logger.info(f'tifs criados {name}')
             temp_df = pd.DataFrame(
                 {'datetime': vtime, **layers, 'point_gid': gid}
             )
             # Salvar no banco de dados
-            save_df_bd(temp_df, name.lower(),file_name)
+            #save_df_bd(temp_df, name.lower(),file_name)
             _min = temp_df.min()
             _max = temp_df.max()
             dfs[name] = pd.concat(
@@ -66,6 +66,38 @@ def grads_to_sql(file_name):
             )
     logger.info(f'{file_name} Time: {datetime.now() - _start}')
     return dfs
+
+
+
+def creat_map_and_bar(file,max_minx):
+    day = file.split('/')[-3].split('T')[0]
+    var = file.split('/')[-2].upper()
+    layer = file.split('/')[-1].replace('.tif', '')
+    dfmax = max_minx[var]['max']
+    dfmin = max_minx[var]['min']
+    _max = float(dfmax[dfmax.index == day][layer])
+    _min = float(dfmin[dfmin.index == day][layer])
+    _convert = variables[var]['convert']
+    
+    title = (
+        f"{var.lower()}_{layer.replace('value','')}_{file.split('/')[-3]}"
+    )
+    color_bar = f'{settings.CATALOG}colorbar'
+    if not isfile(f'{color_bar}/{title}.png'):
+        view_colormap(
+            f'{color_bar}/{title}.png', variables[var]['color'], _min, _max
+        )
+    return (creat_map_file(
+        file,
+        var,
+        layer,
+        (int(_min * _convert), int((_max + 0.01) * _convert)),
+        file.split('/')[-3],
+    ), title)
+
+
+
+
 
 
 def to_db():
@@ -97,38 +129,30 @@ def to_db():
     tifs_path = f'{settings.CATALOG}cempa_tifs'
 
     ## Creat .map
-    biglayer = []
     tifs_path = f'{settings.CATALOG}cempa_tifs'
-    color_bar = f'{settings.CATALOG}colorbar'
+    
     files = glob(f'{tifs_path}/*/*/*.tif')
     if isfile(f'{settings.CATALOG}{settings.MAPFILE}'):
         remove(f'{settings.CATALOG}{settings.MAPFILE}')
-    for file in files:
-        day = file.split('/')[-3].split('T')[0]
-        var = file.split('/')[-2].upper()
-        layer = file.split('/')[-1].replace('.tif', '')
-        dfmax = max_minx[var]['max']
-        dfmin = max_minx[var]['min']
-        _max = float(dfmax[dfmax.index == day][layer])
-        _min = float(dfmin[dfmin.index == day][layer])
-        _convert = variables[var]['convert']
-        creat_map_file(
-            file,
-            var,
-            layer,
-            (int(_min * _convert), int((_max + 0.01) * _convert)),
-            file.split('/')[-3],
-        )
-        title = (
-            f"{var.lower()}_{layer.replace('value','')}_{file.split('/')[-3]}"
-        )
-        biglayer.append(title)
-        if not isfile(f'{color_bar}/{title}.png'):
-            view_colormap(
-                f'{color_bar}/{title}.png', variables[var]['color'], _min, _max
-            )
+    # TODO fazer com multiprocess
+    args_to_map_and_bar = [(file, max_minx) for file in files]
 
-    return biglayer
+    with Pool(settings.N_POOL) as workers:
+        returns_map_and_bar = workers.map(
+            creat_map_and_bar, args_to_map_and_bar
+        )
+
+    biglayer = []
+    text_list = []
+    for tmp_text, title in returns_map_and_bar:
+        text_list.append(tmp_text)
+        biglayer.append(title)
+
+    text = '\n'.join(tmp_text)
+
+    with open(f'{settings.CATALOG}{settings.MAPFILE}', 'w') as file_object:
+        file_object.write(text)
+    return sorted(biglayer)
 
 
 if __name__ == '__main__':
