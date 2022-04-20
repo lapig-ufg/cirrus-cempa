@@ -1,11 +1,9 @@
-import os
 import time
 from datetime import datetime
 from os import mkdir
-from os.path import exists, isdir
+from os.path import isdir
 from shutil import rmtree
 
-from dynaconf import Dynaconf
 from requests import post
 
 from cirrus.dowloads import downloads_files
@@ -15,18 +13,12 @@ from cirrus.util.cach_make import run
 # from cirrus.netcdf2postgis import main
 from cirrus.util.config import logger, send_emai, settings
 
-initial_config = Dynaconf(
-    envvar_prefix='CEMPA',
-    settings_files=['settings.toml', '.secrets.toml'],
-)
 
 
 def main():
-    logger.info(f'Numero de pool {initial_config.N_POOL}')
+    logger.info(f'Numero de pool {settings.N_POOL}')
     logger.log('CEMPA', 'Startd cirrus')
     _start = datetime.now()
-    if exists('../http.log'):
-        os.remove('../http.log')
     if downloads_files():
         logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
         logger.info('iniciando a limpesa do banco Banco linado')
@@ -48,12 +40,12 @@ def main():
 
         layer = to_db()
 
-        restart_ows = post(initial_config.CEMPA_OWS_URL)
+        restart_ows = post(settings.CEMPA_OWS_URL)
         if restart_ows.status_code == 204:
             time.sleep(60)
-            if isdir(initial_config.OWS_CACH):
+            if isdir(settings.OWS_CACH):
                 try:
-                    rmtree(initial_config.OWS_CACH)
+                    rmtree(settings.OWS_CACH)
                 except Exception:
                     logger.exception('Error ao limpar o cach')
             logger.log('CEMPA', f'ows reiniciado e cach limpo')
