@@ -3,6 +3,7 @@ CEMPADIR = "/STORAGE/cirrus/"
 CATALOG = "/STORAGE/catalog/"
 CRS = 'epsg:4674'
 N_POOL = 10
+CACH_POOL = 10
 vars = ['albedt','tempc','ue_avg','ve_avg',
 'w','rh','geo','cloud','precip','acccon',
 'sfc_press','sea_press','t2mj','td2mj','u10mj',
