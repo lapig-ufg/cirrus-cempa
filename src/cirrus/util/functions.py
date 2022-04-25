@@ -30,6 +30,9 @@ def view_colormap(fname, cmap, start, end):
     )
     ax.imshow([colors], extent=[0, 20, 0, 1])
     plt.savefig(fname, dpi=300, transparent=False)
+    
+
+
 
 
 def get_time(name: str, return_txt=False) -> str:
@@ -109,6 +112,18 @@ def get_pallet(_min, _max, name):
                 'color1': _color[n],
                 #'INTERVALS': INTERVALS
             }
+
+def creat_pallet_txt(filename,start, end, p_color):
+    _len_cor = len(p_color)
+    with open(filename, 'w') as file:
+        for n, cor in enumerate(p_color):
+            r,g,b = cor
+            eq_minmax = (end - start)
+            mini = int((eq_minmax / _len_cor) * n + start)
+            maxi = int((eq_minmax / _len_cor) * (n + 1) + start)
+            file.write(f'{mini}-{maxi}: {r} {g} {b} 255\n')
+
+
 
 
 def create_folder_for_tiffs(path_level1, name):

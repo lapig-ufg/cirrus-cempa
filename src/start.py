@@ -31,6 +31,20 @@ def clear_dir():
 
 
 
+def ows(layer):
+    restart_ows = post(settings.CEMPA_OWS_URL)
+    if restart_ows.status_code == 204:
+        time.sleep(60)
+        if isdir(settings.OWS_CACH):
+            try:
+                rmtree(settings.OWS_CACH)
+            except Exception:
+                logger.exception('Error ao limpar o cach')
+        logger.log('CEMPA', f'ows reiniciado e cach limpo')
+        time.sleep(60)
+        logger.log('CEMPA', f'inicinado criacao do cach')
+        run(layer)
+
 def main():
     logger.info(f'Numero de pool {settings.N_POOL}')
     logger.log('CEMPA', 'Startd cirrus')
@@ -45,19 +59,8 @@ def main():
 
 
         layer = to_db()
+        #ows(layer)
 
-        restart_ows = post(settings.CEMPA_OWS_URL)
-        if restart_ows.status_code == 204:
-            time.sleep(60)
-            if isdir(settings.OWS_CACH):
-                try:
-                    rmtree(settings.OWS_CACH)
-                except Exception:
-                    logger.exception('Error ao limpar o cach')
-            logger.log('CEMPA', f'ows reiniciado e cach limpo')
-            time.sleep(60)
-            logger.log('CEMPA', f'inicinado criacao do cach')
-            run(layer)
 
     # else:
     #    pass

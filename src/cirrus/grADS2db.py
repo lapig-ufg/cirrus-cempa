@@ -12,7 +12,7 @@ from xgrads import open_CtlDataset
 from cirrus.grADS2tif import grADS2tiff
 from cirrus.util.config import logger, settings, variables
 from cirrus.util.db import save_df_bd
-from cirrus.util.functions import view_colormap
+from cirrus.util.functions import creat_pallet_txt, view_colormap
 from generatmap.map import creat_map_file
 
 
@@ -84,10 +84,9 @@ def creat_map_and_bar(args):
         f"{var.lower()}_{layer.replace('value','')}_{file.split('/')[-3]}"
     )
     color_bar = f'{settings.CATALOG}colorbar'
-    if not isfile(f'{color_bar}/{title}.png'):
-        view_colormap(
-            f'{color_bar}/{title}.png', variables[var]['color'], _min, _max
-        )
+    
+    view_colormap(f'{color_bar}/{title}.png', variables[var]['color'], _min, _max)
+    creat_pallet_txt(f'{color_bar}/{title}.txt', int(_min * _convert), int(_max * _convert), variables[var]['color'])
     return (creat_map_file(
         file,
         var,
