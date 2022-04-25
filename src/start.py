@@ -32,7 +32,9 @@ def clear_dir():
 
 
 def ows(layer):
+    logger.log('CEMPA', f'reiniciando o server ows')
     restart_ows = post(settings.CEMPA_OWS_URL)
+    logger.log('CEMPA', f'ows foi reiniciado')
     if restart_ows.status_code == 204:
         time.sleep(60)
         if isdir(settings.OWS_CACH):
@@ -59,6 +61,7 @@ def main():
 
 
         layer = to_db()
+        logger.debug('Chamando ows function')
         ows(layer)
 
 
