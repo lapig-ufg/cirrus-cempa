@@ -84,9 +84,11 @@ def creat_map_and_bar(args):
         f"{var.lower()}_{layer.replace('value','')}_{file.split('/')[-3]}"
     )
     color_bar = f'{settings.CATALOG}colorbar'
-    
+    color_txt = f'{color_bar}/{title}.txt'
     view_colormap(f'{color_bar}/{title}.png', variables[var]['color'], _min, _max)
-    creat_pallet_txt(f'{color_bar}/{title}.txt', int(_min * _convert), int(_max * _convert), variables[var]['color'])
+    creat_pallet_txt(color_txt, int(_min * _convert), int(_max * _convert), variables[var]['color'])
+
+    logger.info(f'gdaldem color-relief {file} {color_txt} {file.replace(".tif","_color.tif")}')
     return (creat_map_file(
         file,
         var,
