@@ -59,7 +59,7 @@ def main():
 
 
         layer = to_db()
-        #ows(layer)
+        ows(layer)
 
 
     # else:
