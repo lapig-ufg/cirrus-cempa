@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 from cirrus.util.color import color
 from cirrus.util.config import logger, variables
 from cirrus.util.db import create_session
-from PIL import ImageColor as color
+from PIL import ImageColor
 
 
 def colobar_convert(n, start, end, _len_color):
@@ -115,7 +115,7 @@ def get_pallet(_min, _max, name):
             }
 
 def creat_pallet_txt(filename,start, end, p_color):
-    _color = [color.getcolor(cor, "RGB") for cor in p_color]
+    _color = [ImageColor.getcolor(cor, "RGB") for cor in p_color]
     _len_cor = len(_color)
     with open(filename, 'w') as file:
         for n, cor in enumerate(_color):
