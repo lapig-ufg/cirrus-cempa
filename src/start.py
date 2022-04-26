@@ -55,7 +55,7 @@ def creat_title_all_file():
         logger.debug(f'Criando title do file {file} {n}/{total_files}')
         if not isdir(file):
             mkdir(file)
-        creat_titles(file,(5,13),22)
+        creat_titles(file,(5,10),22)
 
 def main():
     logger.info(f'Numero de pool {settings.N_POOL}')
