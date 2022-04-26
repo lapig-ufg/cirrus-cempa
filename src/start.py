@@ -3,7 +3,7 @@ from datetime import datetime
 from os import mkdir
 from os.path import isdir
 from shutil import rmtree
-
+from glob import glob
 from requests import post
 
 from cirrus.dowloads import downloads_files
@@ -12,6 +12,7 @@ from cirrus.model import clear_tables
 from cirrus.util.cach_make import run
 # from cirrus.netcdf2postgis import main
 from cirrus.util.config import logger, send_emai, settings
+from cirrus.util.functions import creat_titles
 
 
 
@@ -47,22 +48,39 @@ def ows(layer):
         logger.log('CEMPA', f'inicinado criacao do cach')
         run(layer)
 
+def creat_title_all_file():
+    files =  [file.replace('_color.tif','') for file in glob(f'{settings.CATALOG}/cempa_tifs/*/*/*_color.tif')]
+    total_files = len(files)
+    for n, file in enumerate(files):
+        logger.debug('Criando title do file {file} {n}/{total_files}')
+        if not isdir(file):
+            mkdir(file)
+            creat_titles(file,(5,13),22)
+
 def main():
     logger.info(f'Numero de pool {settings.N_POOL}')
     logger.log('CEMPA', 'Startd cirrus')
     _start = datetime.now()
-    if downloads_files():
+    if True:#downloads_files():
         logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
         logger.info('iniciando a limpesa do banco Banco linado')
-        clear_tables()
+        #clear_tables()
         logger.info('Banco limpo')
         # Create cempa_tifs
-        clear_dir()
+        #clear_dir()
 
 
-        layer = to_db()
+        #layer = to_db()
         logger.debug('Chamando ows function')
-        ows(layer)
+        #ows(layer)
+
+        _start_title = datetime.now()
+        logger.log('CEMPA', 'Iniciando o gerador de title')
+        creat_title_all_file()
+        logger.log('CEMPA', f'end titles Time:{datetime.now() - _start_title}')
+
+
+
 
 
     # else:

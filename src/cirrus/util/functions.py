@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 from glob import glob
-from os.path import isdir
+from os.path import isdir, isfile
 import gdal2tiles
 
 import seaborn as sns
@@ -137,11 +137,12 @@ def create_folder_for_tiffs(path_level1, name):
 
 
 
-def creat_titles(file):
-    options = {'zoom': (5,10),
+def creat_titles(dir_file,zoom = (5,10),  cpu_number=1):
+    options = {'zoom': zoom,
     'webviewer':'openlayers',
+    'processes':cpu_number,
     'resume':False}
     #'resampling':'bilinear'}
-
-
-    gdal2tiles.generate_tiles(file, '.', **options)
+    file = f'{dir_file}_color.tif'
+    if not isfile(file):
+        gdal2tiles.generate_tiles(file, dir_file, **options)
