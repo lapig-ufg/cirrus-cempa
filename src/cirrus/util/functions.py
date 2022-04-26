@@ -17,7 +17,7 @@ def colobar_convert(n, start, end, _len_color):
     return f'{((end - start) / _len_color) * n + start:.1f}'
 
 
-def view_colormap(fname, cmap, start, end):
+def view_colormap(fname, cmap, start, end,type_var=''):
     """Plot a colormap with its grayscale equivalent"""
     plt.rc('xtick', labelsize=16)
     cmap = sns.color_palette(cmap)
@@ -31,6 +31,7 @@ def view_colormap(fname, cmap, start, end):
         [colobar_convert(n, start, end, 20) for n in range(0, 21, 2)],
     )
     ax.imshow([colors], extent=[0, 20, 0, 1])
+    plt.xlabel(type_var, fontsize=16)
     plt.savefig(fname, dpi=300, transparent=False)
     
 

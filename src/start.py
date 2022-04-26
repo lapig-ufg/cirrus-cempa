@@ -72,14 +72,14 @@ def main():
         #clear_dir()
 
 
-        #layer = to_db()
+        layer = to_db()
         logger.debug('Chamando ows function')
-        #ows(layer)
+        ows(layer)
 
-        _start_title = datetime.now()
-        logger.log('CEMPA', 'Iniciando o gerador de title')
-        creat_title_all_file()
-        logger.log('CEMPA', f'end titles Time:{datetime.now() - _start_title}')
+        #_start_title = datetime.now()
+        #logger.log('CEMPA', 'Iniciando o gerador de title')
+        #creat_title_all_file()
+        #logger.log('CEMPA', f'end titles Time:{datetime.now() - _start_title}')
 
 
 

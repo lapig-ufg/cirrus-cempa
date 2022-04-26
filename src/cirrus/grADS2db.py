@@ -43,19 +43,19 @@ def grads_to_sql(file_name):
             gid = [i for i, _ in enumerate(vtime, 1)]
             for _id, layer_name in variables[name]['layers']:
                 if _id > -1:
-                    grADS2tiff(dataframe, name, layer_name, _id)
+                    #grADS2tiff(dataframe, name, layer_name, _id)
                     layers[layer_name] = np.meshgrid(var[_id], indexing='ij')[
                         0
                     ]
                 else:
-                    grADS2tiff(dataframe, name, layer_name)
+                    #grADS2tiff(dataframe, name, layer_name)
                     layers[layer_name] = np.meshgrid(var, indexing='ij')[0]
             logger.info(f'tifs criados {name}')
             temp_df = pd.DataFrame(
                 {'datetime': vtime, **layers, 'point_gid': gid}
             )
             # Salvar no banco de dados
-            save_df_bd(temp_df, name.lower(),file_name)
+            #save_df_bd(temp_df, name.lower(),file_name)
             _min = temp_df.min()
             _max = temp_df.max()
             dfs[name] = pd.concat(
@@ -86,7 +86,7 @@ def creat_map_and_bar(args):
     color_bar = f'{settings.CATALOG}colorbar'
     color_txt = f'{color_bar}/{title}.txt'
     view_colormap(f'{color_bar}/{title}.png', variables[var]['color'], _min, _max)
-    creat_pallet_txt(color_txt, int(_min * _convert), int(_max * _convert), variables[var]['color'])
+    creat_pallet_txt(color_txt, int(_min * _convert), int(_max * _convert), variables[var]['color'],,variables[var]['comment'] )
     cmd = f'gdaldem color-relief {file} {color_txt} {file.replace(".tif","_color.tif")}'
 
     logger.info('Create imagecolor {file}')
