@@ -25,6 +25,21 @@ RUN wget https://download.osgeo.org/proj/proj-${PROJ_VERSION}.tar.gz -P /tmp/res
         cmake .. -DCMAKE_INSTALL_PREFIX=/usr && \
         cmake --build . --parallel 4 && \ 
         cmake --build . --target install
+
+USER root
+RUN apt-get install -y libpq-dev postgresql g++ sqlite3 libsqlite3-dev libtiff5-dev curl pkg-config
+#-----------------------------
+# Download GDAL v3.4.2 Source (ex. 3.4.2)
+ARG GDAL_VERSION=3.4.2
+ENV PROJ_INCLUDE_DIR=/usr/include
+RUN     cd /root && \
+        wget download.osgeo.org/gdal/${GDAL_VERSION}/gdal-${GDAL_VERSION}.tar.gz && \
+        tar xfv gdal-${GDAL_VERSION}.tar.gz  && \
+        cd gdal-${GDAL_VERSION} && \
+        apt-get install -y libpq-dev && \
+        cp -rvp /usr/include/proj.h /usr/lib && cp -rvp /usr/include/proj.h /usr/local && \
+        ./configure --with-geos --with-pg -with-proj && \
+        make clean &&  make -j24 &&  make install      
 ##############################################################
 #Final Image
 FROM python:3.9.10-slim-bullseye as runner 
@@ -38,13 +53,13 @@ COPY --from=builder   /usr/local/lib /usr/local/lib
 COPY --from=builder   /usr/bin /usr/bin
 
 COPY requirements.txt ./
-RUN apt-get update && apt-get -y install python3-dev libproj-dev libgeos-dev gcc libpq-dev python-dev libgeos++-dev libproj-dev python3-pip
-RUN pip3 install pyshp==2.2.0 shapely==1.8.1 cartopy==0.20.2
+RUN apt-get update && apt-get -y install python3-dev libgeos-dev gcc libpq-dev python-dev libgeos++-dev  python3-pip
+RUN pip3 install pyshp==2.2.0 shapely==1.8.1 
 
 RUN pip3 install -r requirements.txt && \
-    apt-get update &&  \
-    apt-get install -y git vim htop net-tools procps wget curl && \
-    rm -rf /var/lib/apt/lists/* && \ 
-    apt-get clean autoclean && \
-    apt-get autoremove --yes && \
-    rm -rf /var/lib/{apt,dpkg,cache,log}/
+        apt-get update &&  \
+        apt-get install -y git vim htop net-tools procps wget curl && \
+        rm -rf /var/lib/apt/lists/* && \ 
+        apt-get clean autoclean && \
+        apt-get autoremove --yes && \
+        rm -rf /var/lib/{apt,dpkg,cache,log}/
