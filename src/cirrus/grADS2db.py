@@ -86,7 +86,7 @@ def creat_map_and_bar(args):
     color_bar = f'{settings.CATALOG}colorbar'
     color_txt = f'{color_bar}/{title}.txt'
     view_colormap(f'{color_bar}/{title}.png', variables[var]['color'], _min, _max)
-    creat_pallet_txt(color_txt, int(_min * _convert), int(_max * _convert), variables[var]['color'],variables[var]['comment'] )
+    creat_pallet_txt(color_txt, int(_min * _convert), int(_max * _convert),variables[var]['comment'] )
     cmd = f'gdaldem color-relief {file} {color_txt} {file.replace(".tif","_color.tif")}'
 
     logger.info('Create imagecolor {file}')
