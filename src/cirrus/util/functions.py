@@ -137,11 +137,10 @@ def create_folder_for_tiffs(path_level1, name):
 
 
 
-def creat_titles(dir_file,zoom = (5,10),  cpu_number=1):
+def creat_titles(dir_file):
     options = {
-        'zoom': zoom,
+        'zoom': (5,9),
         'webviewer':'openlayers',
-        'nb_processes':cpu_number,
         'resume':False,
         'resampling':'bilinear'
         }

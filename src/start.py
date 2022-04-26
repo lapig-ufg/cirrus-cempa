@@ -56,11 +56,8 @@ def creat_title_all_file():
         if not isdir(file):
             mkdir(file)
 
-    def run_title(file):    
-        creat_titles(file,(6,8),1)
-    
     with Pool(22) as work:
-        work.map(run_title, files)
+        work.map(creat_titles, files)
 
 def main():
     logger.info(f'Numero de pool {settings.N_POOL}')
