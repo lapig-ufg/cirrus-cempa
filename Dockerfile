@@ -45,7 +45,7 @@ RUN apt-get install -y libpq-dev postgresql g++ sqlite3 libsqlite3-dev libtiff5-
 
 ARG GDAL_VERSION=3.4.1
 ENV PROJ_INCLUDE_DIR=/usr/include
-RUN     cd /root && \
+RUN     cd /tmp && \
         wget download.osgeo.org/gdal/${GDAL_VERSION}/gdal-${GDAL_VERSION}.tar.gz && \
         tar xfv gdal-${GDAL_VERSION}.tar.gz  && \
         cd gdal-${GDAL_VERSION} && \
