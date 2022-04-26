@@ -51,13 +51,13 @@ def main():
     logger.info(f'Numero de pool {settings.N_POOL}')
     logger.log('CEMPA', 'Startd cirrus')
     _start = datetime.now()
-    if True:#downloads_files():
+    if downloads_files():
         logger.info(f'Tempo de Dowload Time:{datetime.now() - _start}')
         logger.info('iniciando a limpesa do banco Banco linado')
-        #clear_tables()
+        clear_tables()
         logger.info('Banco limpo')
         # Create cempa_tifs
-        #clear_dir()
+        clear_dir()
 
 
         layer = to_db()
