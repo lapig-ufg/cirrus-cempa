@@ -2,6 +2,7 @@ import os
 from datetime import datetime
 from glob import glob
 from os.path import isdir
+import gdal2tiles
 
 import seaborn as sns
 from matplotlib import pyplot as plt
@@ -133,3 +134,14 @@ def create_folder_for_tiffs(path_level1, name):
         os.mkdir(path_level1)
     if not isdir(f'{path_level1}/{name}'):
         os.mkdir(f'{path_level1}/{name}')
+
+
+
+def creat_titles(file):
+    options = {'zoom': (5,10),
+    'webviewer':'openlayers',
+    'resume':False}
+    #'resampling':'bilinear'}
+
+
+    gdal2tiles.generate_tiles(file, '.', **options)

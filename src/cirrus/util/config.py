@@ -290,9 +290,7 @@ variables_not_run = {
         ],
         'convert': 1000,
     },
-}
-variables = {
-    'TEMPC': {
+        'TEMPC': {
         'layers': [
             (0, 'lev_100'),
             (1, 'lev_150'),
@@ -426,7 +424,10 @@ variables = {
         ],
         'convert': 100,
     },
-    'PRECIP': {
+    
+}
+variables = {
+'PRECIP': {
         'layers': [(-1, 'value')],
         'comment': '- RAMS : total accum precip                      [mm liq  ]',
         'type': np.int32,
