@@ -32,7 +32,7 @@ def view_colormap(fname, cmap, start, end,type_var=''):
     )
     ax.imshow([colors], extent=[0, 20, 0, 1])
     plt.xlabel(type_var, fontsize=16)
-    plt.savefig(fname, dpi=300, transparent=False)
+    plt.savefig(fname, dpi=300, transparent=False, bbox_inches='tight')
     
 
 
