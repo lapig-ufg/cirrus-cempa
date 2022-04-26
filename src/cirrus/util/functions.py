@@ -140,8 +140,8 @@ def create_folder_for_tiffs(path_level1, name):
 def creat_titles(dir_file,zoom = (5,10),  cpu_number=1):
     options = {'zoom': zoom,
     'webviewer':'openlayers',
-    'processes':cpu_number,
-    'resume':False}
+    'nb_processes':cpu_number,
+    'resume':True}
     #'resampling':'bilinear'}
     file = f'{dir_file}_color.tif'
     logger.debug(f'{file}')
