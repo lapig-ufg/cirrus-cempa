@@ -99,7 +99,7 @@ def creat_map_and_bar(args):
         )
     cmd = f'gdaldem color-relief {file} {color_txt} {file.replace(".tif","_color.tif")}'
 
-    logger.info('Create imagecolor {file}')
+    logger.info(f'Create imagecolor {file}')
     logger.debug(cmd)
     subprocess.call(cmd.split())
     return (creat_map_file(
@@ -146,7 +146,7 @@ def to_db():
     ## Creat .map
     tifs_path = f'{settings.CATALOG}cempa_tifs'
     
-    files = glob(f'{tifs_path}/*/*/*.tif')
+    files = [file for file in glob(f'{tifs_path}/*/*/*.tif') if not '_color.tif' in file]
     if isfile(f'{settings.CATALOG}{settings.MAPFILE}'):
         remove(f'{settings.CATALOG}{settings.MAPFILE}')
     # TODO fazer com multiprocess
