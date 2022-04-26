@@ -13,7 +13,7 @@ from cirrus.util.cach_make import run
 # from cirrus.netcdf2postgis import main
 from cirrus.util.config import logger, send_emai, settings
 from cirrus.util.functions import creat_titles
-
+from multiprocessing import Pool
 
 
 def clear_dir():
@@ -52,10 +52,15 @@ def creat_title_all_file():
     files =  [file.replace('_color.tif','') for file in glob(f'{settings.CATALOG}cempa_tifs/*/*/*_color.tif')]
     total_files = len(files)
     for n, file in enumerate(files,1):
-        logger.debug(f'Criando title do file {file} {n}/{total_files}')
+        #logger.debug(f'Criando title do file {file} {n}/{total_files}')
         if not isdir(file):
             mkdir(file)
-        creat_titles(file,(5,10),22)
+
+    def run_title(file):    
+        creat_titles(file,(6,8),1)
+    
+    with Pool(22) as work:
+        work.map(run_title, files)
 
 def main():
     logger.info(f'Numero de pool {settings.N_POOL}')
