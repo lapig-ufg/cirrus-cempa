@@ -144,6 +144,7 @@ def creat_titles(dir_file,zoom = (5,10),  cpu_number=1):
     'resume':False}
     #'resampling':'bilinear'}
     file = f'{dir_file}_color.tif'
+    logger.debug(f'{file}')
     if isfile(file):
         logger.debug('Chamando gdal2title')
         gdal2tiles.generate_tiles(file, dir_file, **options)
