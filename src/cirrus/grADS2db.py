@@ -1,9 +1,9 @@
 from datetime import datetime
 from glob import glob
-from multiprocessing import Pool
+from multiprocessing import Pool, cpu_count
 from os import remove
 from os.path import isfile
-
+import subprocess
 import numpy as np
 import pandas as pd
 import rioxarray
@@ -87,8 +87,11 @@ def creat_map_and_bar(args):
     color_txt = f'{color_bar}/{title}.txt'
     view_colormap(f'{color_bar}/{title}.png', variables[var]['color'], _min, _max)
     creat_pallet_txt(color_txt, int(_min * _convert), int(_max * _convert), variables[var]['color'])
+    cmd = f'gdaldem color-relief {file} {color_txt} {file.replace(".tif","_color.tif")}'
 
-    logger.info(f'gdaldem color-relief {file} {color_txt} {file.replace(".tif","_color.tif")}')
+    logger.info('Create imagecolor {file}')
+    logger.debug(cmd)
+    subprocess.call(cmd.split())
     return (creat_map_file(
         file,
         var,
@@ -139,7 +142,7 @@ def to_db():
     # TODO fazer com multiprocess
     args_to_map_and_bar = [(file, max_minx) for file in files]
 
-    with Pool(settings.N_POOL) as workers:
+    with Pool(int(cpu_count()-2)) as workers:
         returns_map_and_bar = workers.map(
             creat_map_and_bar, args_to_map_and_bar
         )
