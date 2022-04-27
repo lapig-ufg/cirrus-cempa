@@ -11,28 +11,38 @@ from cirrus.util.color import color
 from cirrus.util.config import logger, variables
 from cirrus.util.db import create_session
 from PIL import ImageColor
-
+import matplotlib as mpl
+from matplotlib.colors import LinearSegmentedColormap
 
 def colobar_convert(n, start, end, _len_color):
     return f'{((end - start) / _len_color) * n + start:.1f}'
 
 
-def view_colormap(fname, cmap, start, end,type_var=''):
-    """Plot a colormap with its grayscale equivalent"""
-    plt.rc('xtick', labelsize=16)
-    cmap = sns.color_palette(cmap)
-    colors = cmap
+def view_colormap(fname, my_cmap,start, end,type_var=''):
+    plt.rc('ytick', labelsize=16)
+    fig, ax = plt.subplots(figsize=(0.5, 16))
+    fig.subplots_adjust(bottom=0.5)
 
-    fig, ax = plt.subplots(
-        1, figsize=(10, 1), subplot_kw=dict(xticks=[], yticks=[])
-    )
-    plt.xticks(
-        range(0, 21, 2),
-        [colobar_convert(n, start, end, 20) for n in range(0, 21, 2)],
-    )
-    ax.imshow([colors], extent=[0, 20, 0, 1])
-    plt.xlabel(type_var, fontsize=16)
-    plt.savefig(fname, dpi=300, transparent=False, bbox_inches='tight')
+    cmap = LinearSegmentedColormap.from_list("",my_cmap)
+    
+    step = 1
+    if end < 1.01:
+      #start = start * 100
+      #end = end * 100
+      step = 0.01
+    norm = mpl.colors.Normalize(vmin=start, vmax=end)
+    cb1 = mpl.colorbar.ColorbarBase(
+        ax, 
+        cmap=cmap,
+       #boundaries=np.arange(start,end,step),
+        norm=norm,
+        orientation='vertical',
+        #extend='both',
+        #extendfrac='auto'
+        )
+
+    cb1.set_label(type_var, fontsize=16)
+    plt.savefig(fname, dpi=300, transparent=True, bbox_inches='tight')
     
 
 

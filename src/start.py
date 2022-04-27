@@ -74,7 +74,7 @@ def main():
 
         layer = to_db()
         logger.debug('Chamando ows function')
-        ows(layer)
+        #ows(layer)
 
         #_start_title = datetime.now()
         #logger.log('CEMPA', 'Iniciando o gerador de title')
