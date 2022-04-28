@@ -111,9 +111,12 @@ def creat_map_and_bar(args):
     ]
 
     logger.info(f'Create imagecolor {file}')
-    for cmd in cmds:
-        sleep(.1)
-        subprocess.call(cmd.split())
+    try:
+        for cmd in cmds:
+            subprocess.call(cmd.split())
+    except Exception as e:
+        logger.log('CEMPA',f'GDAL fall {file}')
+        logger.exception('Error GDAL')
     return (creat_map_file(
         file,
         var,
