@@ -161,7 +161,7 @@ def to_db():
     ## Creat .map
     tifs_path = f'{settings.CATALOG}cempa_tifs'
     
-    files = [file for file in glob(f'{tifs_path}/*/*/*.tif') if not '_color.tif' in file]
+    files = [file for file in glob(f'{tifs_path}/*/*/*.tif') if not '_color.tif' in file and not '_tiled.tif' in file]
     if isfile(f'{settings.CATALOG}{settings.MAPFILE}'):
         remove(f'{settings.CATALOG}{settings.MAPFILE}')
     # TODO fazer com multiprocess
