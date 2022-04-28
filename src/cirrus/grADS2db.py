@@ -4,6 +4,7 @@ from multiprocessing import Pool, cpu_count
 from os import remove
 from os.path import isfile
 import subprocess
+from time import sleep
 import numpy as np
 import pandas as pd
 import rioxarray
@@ -111,6 +112,7 @@ def creat_map_and_bar(args):
 
     logger.info(f'Create imagecolor {file}')
     for cmd in cmds:
+        sleep(.1)
         subprocess.call(cmd.split())
     return (creat_map_file(
         file,
