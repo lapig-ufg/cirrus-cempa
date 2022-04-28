@@ -1,5 +1,5 @@
 LAYER
-    NAME "{{view_name}}_color"
+    NAME "{{view_name}}_tiled"
     DATA "{{file_name}}"
     EXTENT  -55.0000000000000000 -21.0000000000000000 -42.9614372253417969 -8.9754829406738299
     METADATA

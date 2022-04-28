@@ -97,18 +97,24 @@ def creat_map_and_bar(args):
         int(_max * _convert),
         variables[var]['color']
         )
-    cmd = f'gdaldem color-relief {file} {color_txt} {file.replace(".tif","_color.tif")}'
+    file_color = file.replace(".tif","_color.tif")
+    file_tiled = file.replace(".tif","_tiled.tif")
+    cmds = [
+        f'gdaldem color-relief {file} {color_txt} {file_color}',
+        f'gdal_translate -co TILED=YES {file_color} {file_tiled}',
+        f'gdaladdo -r bilinear {file_tiled} 2 4 8 16 32 64 128'
+    ]
 
     logger.info(f'Create imagecolor {file}')
-    logger.debug(cmd)
-    subprocess.call(cmd.split())
+    for cmd in cmds:
+        subprocess.call(cmd.split())
     return (creat_map_file(
         file,
         var,
         layer,
         (int(_min * _convert), int((_max + 0.01) * _convert)),
         file.split('/')[-3],
-    ), title)
+    ), f"{title}_tiled")
 
 
 

@@ -39,7 +39,7 @@ def creat_map_file(
                 ),
              }
         )
-        row['file_name'] = file_name.replace('.tif','_color.tif')
+        row['file_name'] = file_name.replace('.tif','_tiled.tif')
         color_map =template_color.render(
             row
         )
