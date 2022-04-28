@@ -39,13 +39,13 @@ def creat_map_file(
                 ),
              }
         )
-        row['file_name'] = file_name.reolace('.tif','_color.tif')
+        row['file_name'] = file_name.replace('.tif','_color.tif')
         color_map =template_color.render(
             row
         )
 
 
-        return  '\n'.join([raw_map,color_map])
+        return  f'{raw_map}\n{color_map}'
     
     except:
         logger.exception('Error')
