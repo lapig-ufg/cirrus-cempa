@@ -81,7 +81,10 @@ async def processRequests(layer):
 
 
 def load_layer(layer):
-    asyncio.run(processRequests(layer))
+    try:
+        asyncio.run(processRequests(layer))
+    except Exception:
+        logger.exception('Erro ao criar cach!')
 
 
 def run(LAYERS):
