@@ -1,0 +1,20 @@
+LAYER
+    NAME "{{view_name}}_color"
+    DATA "{{file_name}}"
+    EXTENT  -55.0000000000000000 -21.0000000000000000 -42.9614372253417969 -8.9754829406738299
+    METADATA
+      "ows_title" "{{ows_title}}"
+      "ows_abstract" "{{ows_abstract}}"
+      "gml_exclude_items" "the_geom"
+      "gml_include_items" "all"
+      "gml_geometries"  "the_geom"
+    END
+    PROCESSING "RESAMPLE=BILINEAR"
+    PROJECTION
+      "init=epsg:4674"
+    END
+    STATUS ON
+    TYPE Raster
+    TEMPLATE "DUMMY"
+    PROCESSING "BANDS=1,2,3"
+END
