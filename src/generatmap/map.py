@@ -45,7 +45,7 @@ def creat_map_file(
         )
 
 
-        return  f'{raw_map}\n{color_map}'
+        return  '\n'.join([raw_map,color_map])
     
     except:
         logger.exception('Error')
