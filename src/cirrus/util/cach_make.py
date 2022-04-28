@@ -18,7 +18,7 @@ BBOX_BRAZIL = {
 meta_path = f'{settings.CATALOG}cempa_metadata'
 
 
-MAX_ZOOM_LEVEL = [5, 6, 7, 8]
+MAX_ZOOM_LEVEL = [6, 7]
 # PORT 5000 - HOMOLOGAÇÃO
 # PORT 3000 - PRODUÇÃO
 OWS_URL = settings.OWS_ROOT_URL
