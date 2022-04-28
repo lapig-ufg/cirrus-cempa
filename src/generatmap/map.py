@@ -17,7 +17,9 @@ def creat_map_file(
 
     
     template = env.get_template('cempa.map')
+    template_color = env.get_template('cempa_color.map')
     row = {}
+
     logger.info(f'ADD no .map para o tiff {file_name}')
     title = f"{name.lower()}_{coll_name.replace('value','')}_{file_date}"
     row['view_name'] = title
@@ -28,7 +30,7 @@ def creat_map_file(
         row['coll_view'] = 'pixel'
         row['file_name'] = file_name
     try:
-        return template.render(
+        raw_map = template.render(
             {
                 **row,
                 'styles': get_pallet(
@@ -37,6 +39,13 @@ def creat_map_file(
                 ),
              }
         )
+        row['file_name'] = file_name.reolace('.tif','_color.tif')
+        color_map =template_color.render(
+            row
+        )
+
+
+        return  f'{raw_map}\n{color_map}'
     
     except:
         logger.exception('Error')
