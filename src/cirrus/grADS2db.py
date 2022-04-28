@@ -99,6 +99,10 @@ def creat_map_and_bar(args):
         )
     file_color = file.replace(".tif","_color.tif")
     file_tiled = file.replace(".tif","_tiled.tif")
+    if isfile(file_color):
+        remove(file_color)
+    if isfile(file_tiled):
+        remove(file_tiled)
     cmds = [
         f'gdaldem color-relief {file} {color_txt} {file_color}',
         f'gdal_translate -co TILED=YES {file_color} {file_tiled}',
