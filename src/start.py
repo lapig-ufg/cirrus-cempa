@@ -73,6 +73,7 @@ def main():
 
 
         layer = to_db()
+        restart_ows = post(settings.CEMPA_OWS_URL)
         logger.debug('Chamando ows function')
         #ows(layer)
 
